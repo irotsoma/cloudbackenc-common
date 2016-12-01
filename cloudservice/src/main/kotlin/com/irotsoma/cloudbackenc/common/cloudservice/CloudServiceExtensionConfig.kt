@@ -29,10 +29,12 @@ package com.irotsoma.cloudbackenc.common.cloudservice
  * @property serviceUUID Internal UUID of the service from the cloud-service-extension.json file.
  * @property packageName Full package name of the factory class for the service
  * @property factoryClass Name of the factory class for the service
+ * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
 data class CloudServiceExtensionConfig(
         val serviceUUID: String,
         val serviceName: String,
         val packageName: String,
-        val factoryClass: String)
+        val factoryClass: String,
+        val releaseVersion: Int)
 

@@ -14,9 +14,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+/*
+ * Created by irotsoma on 6/20/2016.
+ */
+package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
-rootProject.name = 'cloudbackenc-common-parent'
-include 'common'
-include 'common:cloudservicesserviceinterface'
-include 'common:encryptionserviceinterface'
+/**
+ * Cloud Service Factory interface
+ *
+ * @author Justin Zak
+ */
+interface CloudServiceFactory {
+    /**
+     * Instance of [CloudServiceAuthenticationService] for the cloud service implementation.
+     */
+     val authenticationService: CloudServiceAuthenticationService
+    /**
+     * Instance of [CloudServiceFileIOService] for the cloud service implementation.
+     */
+     val cloudServiceFileIOService: CloudServiceFileIOService
+}
 

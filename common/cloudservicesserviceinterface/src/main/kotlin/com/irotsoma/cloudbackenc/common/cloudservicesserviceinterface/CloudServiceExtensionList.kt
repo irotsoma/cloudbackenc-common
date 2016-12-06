@@ -14,9 +14,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+/*
+ * Created by irotsoma on 7/12/2016.
+ */
+package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
-rootProject.name = 'cloudbackenc-common-parent'
-include 'common'
-include 'common:cloudservicesserviceinterface'
-include 'common:encryptionserviceinterface'
+import java.util.*
 
+/**
+ * Object for passing a list of Cloud Service Extensions through an API
+ *
+ * @author Justin Zak
+ */
+class CloudServiceExtensionList : ArrayList<CloudServiceExtension>()

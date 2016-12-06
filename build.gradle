@@ -47,7 +47,6 @@ plugins {
 }
 
 subprojects {
-    group 'com.irotsoma.cloudbackenc'
     version '0.2-SNAPSHOT'
     apply plugin: 'java'
     apply plugin: 'kotlin'
@@ -129,6 +128,7 @@ subprojects {
 }
 
 project(':common') {
+    group 'com.irotsoma.cloudbackenc'
     apply plugin: 'maven'
     uploadArchives {
         repositories {
@@ -180,7 +180,8 @@ project(':common') {
     }
 }
 
-project('common:cloudservicesserviceinterface'){
+project(':common:cloudservicesserviceinterface'){
+    group 'com.irotsoma.cloudbackenc.common'
     dependencies{
         //common classes
         compile project(':common')
@@ -237,7 +238,8 @@ project('common:cloudservicesserviceinterface'){
 
 }
 
-project('common:encryptionserviceinterface'){
+project(':common:encryptionserviceinterface'){
+    group 'com.irotsoma.cloudbackenc.common'
     dependencies{
         //common classes
         compile project(':common')

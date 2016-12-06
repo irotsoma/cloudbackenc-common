@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-rootProject.name = 'cloudbackenc-common-parent'
+rootProject.name = 'common-parent'
 include 'common'
 include 'common:cloudservicesserviceinterface'
 include 'common:encryptionserviceinterface'

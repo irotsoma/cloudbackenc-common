@@ -37,7 +37,7 @@ enum class RestExceptionExceptions {
         }
     },
     /**
-     * Returned when attempting to access a URL under /cloudservice with an invalid UUID.
+     * Returned when attempting to access a URL under /cloud-service with an invalid UUID.
      */
     Invalid_Cloud_Service_UUID{
         override fun httpStatusCode(): Int{

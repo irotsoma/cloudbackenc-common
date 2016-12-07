@@ -7,6 +7,6 @@ package com.irotsoma.cloudbackenc.common
 import java.util.*
 
 data class FileMetadata(
-        val senderID: UUID,
-        val senderFileID: UUID
+        val senderId: UUID,
+        val senderFileId: UUID
 )

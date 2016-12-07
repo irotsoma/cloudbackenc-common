@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 buildscript {
-    ext.springBootVersion = '1.4.1.RELEASE'
+    ext.springBootVersion = '1.4.2.RELEASE'
     ext.tornadofxVersion = '1.5.7'
     ext.junitVersion = '4.12'
     ext.log4jVersion = '2.6.2'
@@ -130,6 +130,10 @@ subprojects {
 project(':common') {
     group 'com.irotsoma.cloudbackenc'
     apply plugin: 'maven'
+    dependencies {
+        //compression
+        compile "org.apache.commons:commons-compress:$apacheCommonsCompressionVersion"
+    }
     uploadArchives {
         repositories {
             mavenDeployer {

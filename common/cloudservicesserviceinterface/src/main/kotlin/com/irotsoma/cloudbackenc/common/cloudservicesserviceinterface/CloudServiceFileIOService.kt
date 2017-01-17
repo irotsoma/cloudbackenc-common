@@ -34,7 +34,7 @@ interface CloudServiceFileIOService {
      * @param filePath A [File] object that points to the file to be uploaded.
      * @returns True if file is successfully uploaded.  Otherwise, false.
      */
-    fun upload(filePath: File) : Boolean
+    fun upload(filePath: File, uploadedFilePath: String) : Boolean
 
     /**
      * Implement to get a list of files and directories from the specified directory on the cloud service.

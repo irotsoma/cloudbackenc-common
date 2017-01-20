@@ -19,16 +19,18 @@ buildscript {
     ext.tornadofxVersion = '1.5.9'
     ext.junitVersion = '4.12'
     ext.log4jVersion = '2.6.2'
-    ext.kotlinVersion = '1.0.6'
+    ext.kotlinVersion = '1.1-M04'
     ext.apacheCommonsValidatorVersion = '1.5.1'
     ext.apacheCommonsCompressionVersion = '1.12'
     ext.jacksonVersion = '2.8.5'
 
-    ext.localMavenRepository = "file://$rootDir/../maven-repository"
     repositories {
         mavenCentral()
         jcenter()
         maven {url 'http://repo.spring.io/plugins-release'}
+
+        //kotlin 1.1 EAP
+        maven {url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1'}
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -58,12 +60,16 @@ subprojects {
     }
     repositories {
         mavenCentral()
+
+        //kotlin 1.1 EAP
+        maven {url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1'}
     }
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.apache.logging.log4j:log4j-1.2-api:$log4jVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
         testCompile "junit:junit:$junitVersion"
+
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -118,13 +124,6 @@ subprojects {
         archives sourceJar
         archives javadocJar
     }
-
-    repositories {
-        maven {
-            url localMavenRepository
-        }
-    }
-
 }
 
 project(':common') {

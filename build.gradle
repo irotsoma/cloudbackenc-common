@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 buildscript {
-    ext.springBootVersion = '1.4.2.RELEASE'
-    ext.tornadofxVersion = '1.5.9'
+    ext.springBootVersion = '1.4.3.RELEASE'
     ext.junitVersion = '4.12'
-    ext.log4jVersion = '2.6.2'
+    ext.log4jVersion = '2.7'
     ext.kotlinVersion = '1.1.0-beta-17'
-    ext.apacheCommonsValidatorVersion = '1.5.1'
-    ext.apacheCommonsCompressionVersion = '1.12'
-    ext.jacksonVersion = '2.8.5'
+    ext.apacheCommonsCompressionVersion = '1.13'
+    ext.jacksonVersion = '2.8.6'
+    ext.dokkaVersion = '0.9.13'
+    ext.liquibaseGradleVersion = '1.2.1'
 
     repositories {
         mavenCentral()
@@ -36,8 +36,8 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
-        classpath "org.liquibase:liquibase-gradle-plugin:1.2.1"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.10"}
+        classpath "org.liquibase:liquibase-gradle-plugin:$liquibaseGradleVersion"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"}
 
     //try to pull repository credentials from either properties or environment variables
     ext.repoUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv('ossrhUsername') ?: ''

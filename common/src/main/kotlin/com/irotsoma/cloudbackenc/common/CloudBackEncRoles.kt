@@ -25,17 +25,17 @@ package com.irotsoma.cloudbackenc.common
  *
  * @author Justin Zak
  */
-enum class CloudBackEncRoles {
+enum class CloudBackEncRoles(val value: String) {
     /**
      * Role used for running integration tests
      */
-    ROLE_TEST,
+    ROLE_TEST("ROLE_TEST"),
     /**
      * Standard user
      */
-    ROLE_USER,
+    ROLE_USER("ROLE_USER"),
     /**
      * Administrative user
      */
-    ROLE_ADMIN;
+    ROLE_ADMIN("ROLE_ADMIN");
 }

@@ -31,6 +31,7 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
 
 interface CloudServiceAuthenticationService  {
 
+    var cloudServiceAuthenticationRefreshListener:CloudServiceAuthenticationRefreshListener?
     /**
      * Requests the login status
      * @param user A [CloudServiceUser] object whose status is requested

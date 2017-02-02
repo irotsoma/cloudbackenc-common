@@ -59,4 +59,11 @@ interface CloudServiceFileIOService {
      * @return True if file was successfully deleted.  Otherwise, false.
      */
     fun delete(targetPath:String) : Boolean
+
+    /**
+     * Implement to return the current available space on the cloud service provider.
+     *
+     * @return Available space in bytes
+     */
+    fun availableSpace():Long
 }

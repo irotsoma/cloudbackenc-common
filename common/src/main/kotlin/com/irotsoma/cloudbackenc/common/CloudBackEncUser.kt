@@ -27,13 +27,13 @@ package com.irotsoma.cloudbackenc.common
  * object call the [maskedPasswordInstance] to remove the password in a manner that the system will recognize.
  *
  * @author Justin Zak
- * @property userId The ID of the user.
+ * @property username The ID of the user.
  * @property password The password of the user.
  * @property email (Optional) The email address of the user.  Must be in a valid format if present.
  * @property enabled Boolean value indicating whether the user can currently access the system.  Default = true
  * @property roles A List of [CloudBackEncRoles] assigned to the user.
  */
-class CloudBackEncUser(val userId : String,
+class CloudBackEncUser(val username: String,
                        val password : String,
                        val email: String?,
                        val enabled: Boolean = true,
@@ -52,6 +52,6 @@ class CloudBackEncUser(val userId : String,
      * @return Instance of [CloudBackEncUser] with the password masked by PASSWORD_MASKED.
      */
     fun maskedPasswordInstance(): CloudBackEncUser{
-        return CloudBackEncUser(userId, PASSWORD_MASKED, email, enabled,roles)
+        return CloudBackEncUser(username, PASSWORD_MASKED, email, enabled,roles)
     }
 }

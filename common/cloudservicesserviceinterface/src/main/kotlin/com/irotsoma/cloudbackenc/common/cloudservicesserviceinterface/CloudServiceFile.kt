@@ -22,19 +22,19 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  * Object that represents a file or directory on a cloud service provider
  *
  * @author Justin Zak
- * @property filePath Full path within the cloud service provider used to access the file (including file name)
  * @property fileName Name of the file (without path information).
  * @property isDirectory True if object is a directory, otherwise false. (default is false)
  * @property isReadOnly True if the user does not have permission to modify the file, otherwise false. (default is false)
  * @property isDownloadable True if the user has permission to download the file, otherwise false. (default is true)
+ * @property filePath Full path within the cloud service provider used to access the file (including file name)
  * @property fileId Cloud Service identifier for a file (if supported)
  * @property size File size in bytes.
  */
 data class CloudServiceFile(
-        val filePath: String,
         val fileName: String,
         val isDirectory: Boolean = false,
         val isReadOnly: Boolean = false,
         val isDownloadable: Boolean = true,
-        val fileId: String? = null,
-        val size: Long? = 0)
+        val filePath: String?,
+        val fileId: String?,
+        val size: Long?)

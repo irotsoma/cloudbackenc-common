@@ -30,25 +30,25 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
  */
 
 interface CloudServiceAuthenticationService  {
-
-    var cloudServiceAuthenticationRefreshListener:CloudServiceAuthenticationRefreshListener?
+    var cloudServiceAuthenticationRefreshListener: CloudServiceAuthenticationRefreshListener?
     /**
      * Requests the login status
-     * @param user A [CloudServiceUser] object whose status is requested
+     * @param cloudServiceUser A [CloudServiceUser] object whose status is requested
      * @return True if user is currently logged in to the cloud service. Otherwise, false.
      */
-    fun isLoggedIn(user: CloudServiceUser): Boolean
+    fun isLoggedIn(cloudServiceUser: CloudServiceUser): Boolean
     /**
      * Requests the system to log into the cloud service.
-     * @param user Internal CloudBackEncUser that is attempting to login.  Used for persistent credential storage.
      * @param cloudServiceUser A [CloudServiceUser] object with username and password for login as well as callback url if needed.
+     * @param cloudBackEncUser Internal [CloudBackEncUser] that is attempting to login.  Used for persistent credential storage.
      * @return [CloudServiceUser.STATE] depending on the result of the login.
      */
-    fun login(user: CloudBackEncUser, cloudServiceUser: CloudServiceUser) : CloudServiceUser.STATE
+    fun login(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE
     /**
      * Requests the system to log off the cloud service.
-     * @param user A [CloudServiceUser] object to log out of the cloud service.
+     * @param cloudServiceUser A [CloudServiceUser] object to log out of the cloud service.
      * @return Message returned from the cloud service if applicable.
      */
-    fun logoff(user: CloudServiceUser) : CloudServiceUser.STATE
+    fun logoff(cloudServiceUser: CloudServiceUser) : CloudServiceUser.STATE
+
 }

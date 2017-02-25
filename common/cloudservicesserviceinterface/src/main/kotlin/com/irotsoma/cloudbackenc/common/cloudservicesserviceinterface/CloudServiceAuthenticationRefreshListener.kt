@@ -4,6 +4,7 @@
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
 import com.irotsoma.cloudbackenc.common.CloudBackEncUser
+import java.util.*
 
 /**
  *
@@ -11,6 +12,6 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
  * @author Justin Zak
  */
 interface CloudServiceAuthenticationRefreshListener{
-    var user:CloudBackEncUser?
-    fun onChange(newState: CloudServiceUser.STATE)
+    var user:CloudBackEncUser
+    fun onChange(cloudServiceUuid: UUID, newState: CloudServiceUser.STATE)
 }

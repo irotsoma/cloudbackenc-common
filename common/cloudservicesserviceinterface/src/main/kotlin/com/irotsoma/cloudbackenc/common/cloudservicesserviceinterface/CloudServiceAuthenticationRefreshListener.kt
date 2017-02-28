@@ -12,6 +12,6 @@ import java.util.*
  * @author Justin Zak
  */
 interface CloudServiceAuthenticationRefreshListener{
-    var user:CloudBackEncUser
+    var user:CloudBackEncUser?
     fun onChange(cloudServiceUuid: UUID, newState: CloudServiceUser.STATE)
 }

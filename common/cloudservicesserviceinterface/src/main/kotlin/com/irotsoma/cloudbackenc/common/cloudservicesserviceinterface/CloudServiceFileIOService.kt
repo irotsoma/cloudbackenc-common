@@ -22,6 +22,7 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 import com.irotsoma.cloudbackenc.common.CloudBackEncUser
 import java.io.File
 import java.io.InputStream
+import java.nio.file.Path
 
 /**
  * Interface for Cloud Service IO operations
@@ -37,7 +38,7 @@ interface CloudServiceFileIOService {
      * @param user A [CloudBackEncUser] object that represents the currently logged in user.
      * @returns A [CloudServiceFile] representing the file that was uploaded or null if the file was not successfully uploaded
      */
-    fun upload(filePath: File, uploadedFilePath: String, user: CloudBackEncUser) : CloudServiceFile?
+    fun upload(filePath: File, uploadedFilePath: Path, user: CloudBackEncUser) : CloudServiceFile?
 
     /**
      * Implement to get a list of files and directories from the specified directory on the cloud service.

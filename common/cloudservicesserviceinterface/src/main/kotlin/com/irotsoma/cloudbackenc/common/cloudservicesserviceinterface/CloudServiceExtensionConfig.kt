@@ -30,11 +30,15 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  * @property packageName Full package name of the factory class for the service
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
+ * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
+ * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  */
 data class CloudServiceExtensionConfig(
         val serviceUUID: String,
         val serviceName: String,
         val packageName: String,
         val factoryClass: String,
+        val requiresUsername: Boolean,
+        val requiresPassword: Boolean,
         val releaseVersion: Int)
 

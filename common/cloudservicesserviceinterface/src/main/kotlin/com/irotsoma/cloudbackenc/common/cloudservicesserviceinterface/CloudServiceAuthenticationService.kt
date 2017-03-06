@@ -27,6 +27,7 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
  * Interface that should be implemented with logic for authorization flows for a cloud service extension.
  *
  * @author Justin Zak
+ * @property cloudServiceAuthenticationRefreshListener An instance of a [CloudServiceAuthenticationRefreshListener] to watch for authentication events.
  */
 
 interface CloudServiceAuthenticationService  {

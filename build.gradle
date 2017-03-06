@@ -62,7 +62,6 @@ subprojects {
     }
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        compile "org.apache.logging.log4j:log4j-1.2-api:$log4jVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
         testCompile "junit:junit:$junitVersion"
 

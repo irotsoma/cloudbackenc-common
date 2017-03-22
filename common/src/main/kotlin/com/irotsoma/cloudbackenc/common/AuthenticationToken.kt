@@ -3,7 +3,6 @@
  */
 package com.irotsoma.cloudbackenc.common
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder
 import java.io.Serializable
 
 /**
@@ -14,8 +13,5 @@ import java.io.Serializable
 class AuthenticationToken(val token: String) : Serializable {
     companion object{
         const val serialVersionUID = 994165165
-    }
-    override fun toString(): String {
-        return ReflectionToStringBuilder.toString(this)
     }
 }

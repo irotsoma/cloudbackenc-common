@@ -20,6 +20,8 @@
  */
 package com.irotsoma.cloudbackenc.common
 
+import java.io.Serializable
+
 /**
  * An object to represent an internal user for authorization across services.
  *
@@ -37,12 +39,13 @@ class CloudBackEncUser(val username: String,
                        val password : String,
                        val email: String?,
                        val enabled: Boolean = true,
-                       val roles : List<CloudBackEncRoles>){
+                       val roles : List<CloudBackEncRoles>) : Serializable{
     companion object{
         /**
          * The text that will replace the password when [maskedPasswordInstance] is called.
          */
         const val PASSWORD_MASKED = "PASSWORD_MASKED"
+        const val serialVersionUID = 579846513196
     }
 
     /**

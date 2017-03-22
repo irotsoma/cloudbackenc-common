@@ -3,8 +3,14 @@
  */
 package com.irotsoma.cloudbackenc.common
 
+import java.io.Serializable
+
 
 data class VersionedExtensionFactoryClass (
         val canonicalName: String,
         val version: Int
-)
+): Serializable {
+    companion object{
+        const val serialVersionUID = 246846816
+    }
+}

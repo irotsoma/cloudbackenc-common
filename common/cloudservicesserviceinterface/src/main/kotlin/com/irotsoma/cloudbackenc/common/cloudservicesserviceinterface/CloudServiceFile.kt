@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  Irotsoma, LLC
+ * Copyright (C) 2016-2017  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -12,10 +12,7 @@
  * GNU Lesser General Public License for more details.
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
- *//*
- * Created by irotsoma on 9/23/2016.
  */
-
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 /**
  * Object that represents a file or directory on a cloud service provider

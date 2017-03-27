@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  Irotsoma, LLC
+ * Copyright (C) 2016-2017  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -65,6 +65,10 @@ class CloudServiceUser(
         /**
          * Used to indicate an error occurred when attempting to log into the cloud service.
          */
-        ERROR
+        ERROR,
+        /**
+         * Used to indicate a successful test without actually calling google services
+         */
+        TEST
     }
 }

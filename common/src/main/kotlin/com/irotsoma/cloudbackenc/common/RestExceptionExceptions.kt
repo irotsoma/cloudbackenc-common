@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  Irotsoma, LLC
+ * Copyright (C) 2016-2017  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -13,7 +13,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-
 /*
  * Created by irotsoma on 10/20/16.
  */
@@ -109,7 +108,7 @@ enum class RestExceptionExceptions {
      * Generates the message associated with the Exception using the locale specified.
      *
      * The message must be part of the messages bundle.  Message keys should be in the format common.message.rest.exception. followed by the name of the enum value in lowercase and will all underscores converted to periods.
-     * For example, the message for [Duplicate_User] is common.message.rest.exception.duplicate.user
+     * For example, the message for Duplicate_User is common.message.rest.exception.duplicate.user
      *
      * @return A locale specific (if available) user friendly message associated with the exception.
      */

@@ -86,7 +86,6 @@ subprojects {
     //javadoc stuff for Kotlin
     apply plugin: 'org.jetbrains.dokka'
     dokka {
-        moduleName = 'data'
         outputFormat = 'javadoc'
         outputDirectory = "$buildDir/docs/javadoc"
         linkMapping {

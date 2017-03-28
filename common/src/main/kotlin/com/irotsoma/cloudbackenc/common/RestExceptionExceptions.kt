@@ -51,7 +51,7 @@ enum class RestExceptionExceptions {
         }
     },
     /**
-     * Returned when attempting to access a URL under /users with an invalid user ID.
+     * Returned when attempting to access a URL with a user parameter with an invalid user ID.
      */
     User_Not_Found{
         override fun httpStatusCode(): Int{

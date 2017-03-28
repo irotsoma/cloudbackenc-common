@@ -18,6 +18,7 @@
  */
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -28,7 +29,11 @@ import java.util.*
  * @author Justin Zak
 */
 
-class CloudServiceExtension {
+class CloudServiceExtension: Serializable {
+    companion object{
+        const val serialVersionUID = 84685165165
+    }
+
     /**
      * UUID of the cloud service extension from the cloud-service-extension.json
      */
@@ -104,5 +109,23 @@ class CloudServiceExtension {
         this.name = name
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
+    }
+
+    /**
+     * Determines if two instances of CloudServiceExtension are equal by comparing the uuid and name.  Both must be the
+     * same.
+     */
+    override fun equals(other: Any?): Boolean {
+        if (other !is CloudServiceExtension){
+            return false
+        } else {
+            return (other.uuid == this.uuid) && (other.name == this.name)
+        }
+    }
+
+    override fun hashCode(): Int {
+        var result = uuid.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
     }
 }

@@ -22,11 +22,21 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
 import java.util.*
 
 /**
- *
+ * Interface for creating a listener for authentication events from a cloud service.
  *
  * @author Justin Zak
  */
 interface CloudServiceAuthenticationRefreshListener{
+    /**
+     * Internal user associated with the listener.
+     */
     var user:CloudBackEncUser?
+
+    /**
+     * Implement to receive authentication change events
+     *
+     * @param cloudServiceUuid UUID of the cloud service associated with this listener.
+     * @param newState The new authentication state.
+     */
     fun onChange(cloudServiceUuid: UUID, newState: CloudServiceUser.STATE)
 }

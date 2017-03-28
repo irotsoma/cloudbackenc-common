@@ -13,26 +13,26 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+
 /*
- * Created by irotsoma on 7/12/2016.
+ * Created by irotsoma on 11/30/16.
  */
-package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
+package com.irotsoma.cloudbackenc.common
 
 import java.io.Serializable
-import java.util.*
 
 /**
- * Object for passing a list of Cloud Service Extensions through an API
+ * Used by extension repositories to store references to installed extensions and pass those through REST services.
  *
  * @author Justin Zak
+ * @property canonicalName Name of the extension to be viewed by humans.
+ * @property version Version of the extension.
  */
-class CloudServiceExtensionList() : Serializable, ArrayList<CloudServiceExtension>() {
-    companion object {
-        const val serialVersionUID = 84685165165
-    }
-    constructor(arrayList: ArrayList<CloudServiceExtension>) : this(){
-        for (extension in arrayList){
-            this.add(extension)
-        }
+data class VersionedExtensionFactoryClass (
+        val canonicalName: String,
+        val version: Int
+    ): Serializable {
+    companion object{
+        const val serialVersionUID = 246846816
     }
 }

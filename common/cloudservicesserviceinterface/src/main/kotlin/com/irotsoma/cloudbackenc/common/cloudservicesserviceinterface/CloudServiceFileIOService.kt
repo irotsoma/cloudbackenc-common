@@ -32,10 +32,10 @@ interface CloudServiceFileIOService {
     /**
      * Implement to upload a file to a cloud service provider.
      *
-     * @param filePath A [File] object that points to the file to be uploaded.
+     * @param filePath A File object that points to the file to be uploaded.
      * @param uploadedFilePath The path on the cloud service to place the uploaded file including file name.
-     * @param user A [CloudBackEncUser] object that represents the currently logged in user.
-     * @returns A [CloudServiceFile] representing the file that was uploaded or null if the file was not successfully uploaded
+     * @param user A CloudBackEncUser object that represents the currently logged in user.
+     * @returns A CloudServiceFile representing the file that was uploaded or null if the file was not successfully uploaded
      */
     fun upload(filePath: File, uploadedFilePath: Path, user: CloudBackEncUser) : CloudServiceFile?
 
@@ -43,8 +43,8 @@ interface CloudServiceFileIOService {
      * Implement to get a list of files and directories from the specified directory on the cloud service.
      *
      * @param dirPath The path within the cloud service provider for which to return a listing.
-     * @param user A [CloudBackEncUser] object that represents the currently logged in user.
-     * @return List of [CloudServiceFile] objects that represents the listing returned by the cloud service
+     * @param user A CloudBackEncUser object that represents the currently logged in user.
+     * @return List of CloudServiceFile objects that represents the listing returned by the cloud service
      */
     fun list(dirPath: String, user: CloudBackEncUser) : List<CloudServiceFile>
 
@@ -52,7 +52,7 @@ interface CloudServiceFileIOService {
      * Implement to download a file from the cloud service provider.
      *
      * @param filePath The path within the cloud service provider for the file to be downloaded.
-     * @param user A [CloudBackEncUser] object that represents the currently logged in user.
+     * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return An input stream to the file downloaded.
      */
     fun download(filePath: String, user: CloudBackEncUser) : InputStream
@@ -61,7 +61,7 @@ interface CloudServiceFileIOService {
      * Implement to delete a file from the cloud service provider
      *
      * @param targetPath The path within the cloud service provider for the file or directory to be deleted.
-     * @param user A [CloudBackEncUser] object that represents the currently logged in user.
+     * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return True if file was successfully deleted.  Otherwise, false.
      */
     fun delete(targetPath:String, user: CloudBackEncUser) : Boolean
@@ -69,7 +69,7 @@ interface CloudServiceFileIOService {
     /**
      * Implement to return the current available space on the cloud service provider.
      *
-     * @param user A [CloudBackEncUser] object that represents the currently logged in user.
+     * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return Available space in bytes
      */
     fun availableSpace(user: CloudBackEncUser):Long

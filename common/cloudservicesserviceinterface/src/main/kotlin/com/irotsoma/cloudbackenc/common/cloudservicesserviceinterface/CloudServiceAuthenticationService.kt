@@ -26,27 +26,27 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
  * Interface that should be implemented with logic for authorization flows for a cloud service extension.
  *
  * @author Justin Zak
- * @property cloudServiceAuthenticationRefreshListener An instance of a [CloudServiceAuthenticationRefreshListener] to watch for authentication events.
+ * @property cloudServiceAuthenticationRefreshListener An instance of a CloudServiceAuthenticationRefreshListener to watch for authentication events.
  */
 
 interface CloudServiceAuthenticationService  {
     var cloudServiceAuthenticationRefreshListener: CloudServiceAuthenticationRefreshListener?
     /**
      * Requests the login status
-     * @param cloudServiceUser A [CloudServiceUser] object whose status is requested
+     * @param cloudServiceUser A CloudServiceUser object whose status is requested
      * @return True if user is currently logged in to the cloud service. Otherwise, false.
      */
     fun isLoggedIn(cloudServiceUser: CloudServiceUser): Boolean
     /**
      * Requests the system to log into the cloud service.
-     * @param cloudServiceUser A [CloudServiceUser] object with username and password for login as well as callback url if needed.
-     * @param cloudBackEncUser Internal [CloudBackEncUser] that is attempting to login.  Used for persistent credential storage.
-     * @return [CloudServiceUser.STATE] depending on the result of the login.
+     * @param cloudServiceUser A CloudServiceUser object with username and password for login as well as callback url if needed.
+     * @param cloudBackEncUser Internal CloudBackEncUser that is attempting to login.  Used for persistent credential storage.
+     * @return CloudServiceUser.STATE depending on the result of the login.
      */
     fun login(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE
     /**
      * Requests the system to log off the cloud service.
-     * @param cloudServiceUser A [CloudServiceUser] object to log out of the cloud service.
+     * @param cloudServiceUser A CloudServiceUser object to log out of the cloud service.
      * @return Message returned from the cloud service if applicable.
      */
     fun logoff(cloudServiceUser: CloudServiceUser) : CloudServiceUser.STATE

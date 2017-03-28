@@ -25,11 +25,11 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  */
 interface CloudServiceFactory {
     /**
-     * Instance of [CloudServiceAuthenticationService] for the cloud service implementation.
+     * Instance of CloudServiceAuthenticationService for the cloud service implementation.
      */
      val authenticationService: CloudServiceAuthenticationService
     /**
-     * Instance of [CloudServiceFileIOService] for the cloud service implementation.
+     * Instance of CloudServiceFileIOService for the cloud service implementation.
      */
      val cloudServiceFileIOService: CloudServiceFileIOService
 }

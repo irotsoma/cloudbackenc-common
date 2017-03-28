@@ -24,7 +24,7 @@ import java.util.*
 /**
  * Cloud Service Extension object
  *
- * Used to refer to an extension.
+ * Used to as a serializable object referring to an extension.
  *
  * @author Justin Zak
 */
@@ -123,6 +123,9 @@ class CloudServiceExtension: Serializable {
         }
     }
 
+    /**
+     * Generates a hash code based on the UUID and name.
+     */
     override fun hashCode(): Int {
         var result = uuid.hashCode()
         result = 31 * result + name.hashCode()

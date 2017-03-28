@@ -22,7 +22,7 @@ import java.io.Serializable
 import java.util.*
 
 /**
- * Object for passing a list of Cloud Service Extensions through an API
+ * Object for passing a list of Cloud Service Extensions through a REST API
  *
  * @author Justin Zak
  */

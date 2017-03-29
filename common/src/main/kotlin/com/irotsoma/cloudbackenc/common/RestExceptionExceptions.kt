@@ -91,7 +91,7 @@ enum class RestExceptionExceptions {
         }
     },
     /**
-     * Returned when setting up a user with an email address that is not in the correct format.
+     * Returned when authentication fails.
      */
     Authentication_Exception{
         override fun httpStatusCode(): Int{

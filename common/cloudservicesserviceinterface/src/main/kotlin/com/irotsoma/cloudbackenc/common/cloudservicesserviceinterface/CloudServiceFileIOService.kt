@@ -35,7 +35,7 @@ interface CloudServiceFileIOService {
      * @param filePath A File object that points to the file to be uploaded.
      * @param uploadedFilePath The path on the cloud service to place the uploaded file including file name.
      * @param user A CloudBackEncUser object that represents the currently logged in user.
-     * @returns A CloudServiceFile representing the file that was uploaded or null if the file was not successfully uploaded
+     * @return A CloudServiceFile representing the file that was uploaded or null if the file was not successfully uploaded
      */
     fun upload(filePath: File, uploadedFilePath: Path, user: CloudBackEncUser) : CloudServiceFile?
 

@@ -13,20 +13,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-/**
+/*
  * Created by irotsoma on 3/13/17.
  */
 package com.irotsoma.cloudbackenc.common
 
 import java.io.Serializable
+import java.util.*
 
 /**
  * Object used to serialize an authentication token through the authentication REST service
  * @property token A CloudBackEnc authentication token
- *
+ * @property tokenExpiration The expiration date/time of the token.
  * @author Justin Zak
  */
-class AuthenticationToken(val token: String) : Serializable {
+class AuthenticationToken(val token: String,
+                          val tokenExpiration: Date?) : Serializable {
     companion object{
         const val serialVersionUID = 994165165
     }

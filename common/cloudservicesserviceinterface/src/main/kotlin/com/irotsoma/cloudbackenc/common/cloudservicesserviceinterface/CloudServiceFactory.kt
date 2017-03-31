@@ -18,12 +18,22 @@
  */
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
+import java.util.*
+
 /**
  * Cloud Service Factory interface
  *
  * @author Justin Zak
  */
 interface CloudServiceFactory {
+    /**
+     * Contains the extension UUID pulled from the config json file
+     */
+    var extensionUUID: UUID
+    /**
+     * Contains the extension name pulled from the config json file
+     */
+    var extensionName: String
     /**
      * Instance of CloudServiceAuthenticationService for the cloud service implementation.
      */

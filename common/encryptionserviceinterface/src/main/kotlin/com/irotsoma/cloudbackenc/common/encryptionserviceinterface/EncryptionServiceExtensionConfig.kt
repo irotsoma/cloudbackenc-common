@@ -23,13 +23,13 @@ package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
  *
  * @author Justin Zak
  * @property serviceName Human readable name of service
- * @property serviceUUID Internal UUID of the service
+ * @property serviceUuid Internal UUID of the service
  * @property packageName Full package name of the factory class for the service
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
 data class EncryptionServiceExtensionConfig (
-        val serviceUUID: String,
+        val serviceUuid: String,
         val serviceName: String,
         val packageName: String,
         val factoryClass: String,

@@ -29,7 +29,7 @@ interface CloudServiceFactory {
     /**
      * Contains the extension UUID pulled from the config json file
      */
-    var extensionUUID: UUID
+    var extensionUuid: UUID
     /**
      * Contains the extension name pulled from the config json file
      */

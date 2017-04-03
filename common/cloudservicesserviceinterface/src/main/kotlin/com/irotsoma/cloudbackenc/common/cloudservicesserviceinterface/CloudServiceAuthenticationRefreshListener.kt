@@ -31,7 +31,10 @@ interface CloudServiceAuthenticationRefreshListener{
      * Internal user associated with the listener.
      */
     var user:CloudBackEncUser?
-
+    /**
+     * Username or other unique ID of the user at the cloud service.
+     */
+    var cloudServiceUsername: String?
     /**
      * Implement to receive authentication change events
      *

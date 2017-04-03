@@ -25,7 +25,7 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  *
  * @author Justin Zak
  * @property serviceName Human readable name of service
- * @property serviceUUID Internal UUID of the service from the cloud-service-extension.json file.
+ * @property serviceUuid Internal UUID of the service from the cloud-service-extension.json file.
  * @property packageName Full package name of the factory class for the service
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
@@ -33,7 +33,7 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  */
 data class CloudServiceExtensionConfig(
-        val serviceUUID: String,
+        val serviceUuid: String,
         val serviceName: String,
         val packageName: String,
         val factoryClass: String,

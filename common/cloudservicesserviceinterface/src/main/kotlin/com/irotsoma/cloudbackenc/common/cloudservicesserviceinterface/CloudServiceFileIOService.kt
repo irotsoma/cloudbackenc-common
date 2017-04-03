@@ -24,11 +24,12 @@ import java.io.InputStream
 import java.nio.file.Path
 
 /**
- * Interface for Cloud Service IO operations
+ * Abstract class for Cloud Service IO operations
  *
  * @author Justin Zak
+ * @property factory An instance of the CloudServiceFactory holding this class
  */
-interface CloudServiceFileIOService {
+abstract class CloudServiceFileIOService(var factory: CloudServiceFactory) {
     /**
      * Implement to upload a file to a cloud service provider.
      *
@@ -37,7 +38,7 @@ interface CloudServiceFileIOService {
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return A CloudServiceFile representing the file that was uploaded or null if the file was not successfully uploaded
      */
-    fun upload(filePath: File, uploadedFilePath: Path, user: CloudBackEncUser) : CloudServiceFile?
+    abstract fun upload(filePath: File, uploadedFilePath: Path, user: CloudBackEncUser) : CloudServiceFile?
 
     /**
      * Implement to get a list of files and directories from the specified directory on the cloud service.
@@ -46,7 +47,7 @@ interface CloudServiceFileIOService {
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return List of CloudServiceFile objects that represents the listing returned by the cloud service
      */
-    fun list(dirPath: String, user: CloudBackEncUser) : List<CloudServiceFile>
+    abstract fun list(dirPath: String, user: CloudBackEncUser) : List<CloudServiceFile>
 
     /**
      * Implement to download a file from the cloud service provider.
@@ -55,7 +56,7 @@ interface CloudServiceFileIOService {
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return An input stream to the file downloaded.
      */
-    fun download(filePath: String, user: CloudBackEncUser) : InputStream
+    abstract fun download(filePath: String, user: CloudBackEncUser) : InputStream
 
     /**
      * Implement to delete a file from the cloud service provider
@@ -64,7 +65,7 @@ interface CloudServiceFileIOService {
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return True if file was successfully deleted.  Otherwise, false.
      */
-    fun delete(targetPath:String, user: CloudBackEncUser) : Boolean
+    abstract fun delete(targetPath:String, user: CloudBackEncUser) : Boolean
 
     /**
      * Implement to return the current available space on the cloud service provider.
@@ -72,5 +73,5 @@ interface CloudServiceFileIOService {
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return Available space in bytes
      */
-    fun availableSpace(user: CloudBackEncUser):Long
+    abstract fun availableSpace(user: CloudBackEncUser):Long
 }

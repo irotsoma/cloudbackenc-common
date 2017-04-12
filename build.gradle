@@ -103,6 +103,9 @@ subprojects {
         archives sourceJar
         archives javadocJar
     }
+    compileKotlin {
+        kotlinOptions.jvmTarget= "1.8"
+    }
 }
 
 project(':common') {

@@ -37,7 +37,7 @@ abstract class CloudServiceAuthenticationService(val factory: CloudServiceFactor
      * @param cloudServiceUser A CloudServiceUser object whose status is requested
      * @return True if user is currently logged in to the cloud service. Otherwise, false.
      */
-    abstract fun isLoggedIn(cloudServiceUser: CloudServiceUser): Boolean
+    abstract fun isLoggedIn(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser): Boolean
     /**
      * Requests the system to log into the cloud service.
      * @param cloudServiceUser A CloudServiceUser object with username and password for login as well as callback url if needed.
@@ -50,6 +50,6 @@ abstract class CloudServiceAuthenticationService(val factory: CloudServiceFactor
      * @param cloudServiceUser A CloudServiceUser object to log out of the cloud service.
      * @return Message returned from the cloud service if applicable.
      */
-    abstract fun logoff(cloudServiceUser: CloudServiceUser) : CloudServiceUser.STATE
+    abstract fun logout(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE
 
 }

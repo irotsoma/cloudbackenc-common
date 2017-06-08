@@ -30,33 +30,82 @@ enum class EncryptionServiceSymmetricEncryptionAlgorithms(val value: String): En
     /**
      * AES algorithm using default mode for the library used
      */
-    AES("AES"),
+    AES("AES"){
+    override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * AES algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    AES_CBC_PKCS5Padding("AES/CBC/PKCS5Padding"),
+    AES_CBC_PKCS5Padding("AES/CBC/PKCS5Padding"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * AES algorithm in CBC mode with CTS padding algorithm
      */
-    AES_CBC_WithCTS("AES/CBC/WithCTS"),
+    AES_CBC_WithCTS("AES/CBC/WithCTS"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * AES algorithm in ECB mode with PKCS5Padding padding algorithm
      */
-    AES_ECB_PKCS5Padding("AES/ECB/PKCS5Padding"),
+    AES_ECB_PKCS5Padding("AES/ECB/PKCS5Padding"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * AES algorithm in ECB mode with CTS padding algorithm
      */
-    AES_ECB_WithCTS("AES/ECB/WithCTS"),
+    AES_ECB_WithCTS("AES/ECB/WithCTS"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * SKIPJACK algorithm in ECB mode with PKCS7Padding padding algorithm
      */
-    SKIPJACK_ECB_PKCS7Padding("SKIPJACK/ECB/PKCS7Padding"),
+    SKIPJACK_ECB_PKCS7Padding("SKIPJACK/ECB/PKCS7Padding"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(64)
+        }
+    },
     /**
      * Twofish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    Twofish_CBC_PKCS5Padding("Twofish/CBC/PKCS5Padding"),
+    Twofish_CBC_PKCS5Padding("Twofish/CBC/PKCS5Padding"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(128)
+        }
+    },
     /**
      * Blowfish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    Blowfish_CBC_PKCS5Padding("Blowfish/CBC/PKCS5Padding")
+    Blowfish_CBC_PKCS5Padding("Blowfish/CBC/PKCS5Padding"){
+        override fun validBlockSizes(): List<Int>
+        {
+            return listOf(64)
+        }
+    };
+
+    /**
+     * The list of valid block sizes in bits (or -1 if not a block algorithm)
+     *
+     * Suggest to be put in ascending numeric order.  And for algorithms with ranges, use steps.  For example Blowfish is 32-448, so I've used steps of 32 to simplify things.
+     *
+     * @return A list of integer values that the user should be allowed to select for the key size of the algorithm.
+     */
+    abstract fun validBlockSizes() : List<Int>
 }

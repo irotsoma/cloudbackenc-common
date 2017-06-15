@@ -101,7 +101,7 @@ enum class EncryptionServiceSymmetricEncryptionAlgorithms(val value: String): En
     };
 
     /**
-     * The list of valid block sizes in bits (or -1 if not a block algorithm)
+     * The list of valid block sizes for generating initialization vectors in bits (or -1 if initialization vector is not used)
      *
      * Suggest to be put in ascending numeric order.  And for algorithms with ranges, use steps.  For example Blowfish is 32-448, so I've used steps of 32 to simplify things.
      *

@@ -48,7 +48,7 @@ abstract class EncryptionServiceFileService {
         if ((algorithm is EncryptionServiceSymmetricEncryptionAlgorithms) && (key is SecretKey)){
             encrypt(inputStream,outputStream, key, algorithm, ivParameterSpec,secureRandom )
         } else if ((algorithm is EncryptionServiceAsymmetricEncryptionAlgorithms) && (key is PublicKey)){
-            encrypt(inputStream,outputStream, key, algorithm, ivParameterSpec,secureRandom )
+            encrypt(inputStream,outputStream, key, algorithm, secureRandom )
         } else {
             throw EncryptionServiceException("Encryption key and algorithm mismatch.")
         }
@@ -71,10 +71,9 @@ abstract class EncryptionServiceFileService {
      * @param outputStream Output stream for the file after encryption
      * @param key Public key to be used to encrypt the file
      * @param algorithm Algorithm from EncryptionServiceAsymmetricEncryptionAlgorithms to be used to encrypt the file.
-     * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
-    abstract fun encrypt(inputStream: InputStream, outputStream: OutputStream, key: PublicKey, algorithm: EncryptionServiceAsymmetricEncryptionAlgorithms, ivParameterSpec: IvParameterSpec?, secureRandom: SecureRandom?)
+    abstract fun encrypt(inputStream: InputStream, outputStream: OutputStream, key: PublicKey, algorithm: EncryptionServiceAsymmetricEncryptionAlgorithms, secureRandom: SecureRandom?)
     /**
      * Decryption function implementation to disambiguate between symmetric and asymmetric functions.
      *
@@ -90,7 +89,7 @@ abstract class EncryptionServiceFileService {
         if ((algorithm is EncryptionServiceSymmetricEncryptionAlgorithms) && (key is SecretKey)){
             decrypt(inputStream,outputStream, key, algorithm, ivParameterSpec,secureRandom )
         } else if ((algorithm is EncryptionServiceAsymmetricEncryptionAlgorithms) && (key is PrivateKey)){
-            decrypt(inputStream,outputStream, key, algorithm, ivParameterSpec,secureRandom )
+            decrypt(inputStream,outputStream, key, algorithm, secureRandom )
         } else {
             throw EncryptionServiceException("Encryption key and algorithm mismatch.")
         }
@@ -113,8 +112,7 @@ abstract class EncryptionServiceFileService {
      * @param outputStream Output stream for the file after decryption
      * @param key Secret key to be used to decrypt the file
      * @param algorithm Algorithm from EncryptionServiceAsymmetricEncryptionAlgorithms to be used to decrypt the file.
-     * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
-    abstract fun decrypt(inputStream: InputStream, outputStream: OutputStream, key: PrivateKey, algorithm: EncryptionServiceAsymmetricEncryptionAlgorithms, ivParameterSpec: IvParameterSpec?, secureRandom: SecureRandom?)
+    abstract fun decrypt(inputStream: InputStream, outputStream: OutputStream, key: PrivateKey, algorithm: EncryptionServiceAsymmetricEncryptionAlgorithms, secureRandom: SecureRandom?)
 }

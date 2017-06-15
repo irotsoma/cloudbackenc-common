@@ -29,14 +29,38 @@ enum class EncryptionServiceAsymmetricEncryptionAlgorithms(val value: String): E
     /**
      * RSA encryption using the default mode for the library used.
      */
-    RSA("RSA"),
+    RSA("RSA") {
+        override fun maxDataSize(): Map<Int,Int> {
+            return mapOf(Pair(1024,127),Pair(2048,255), Pair(3072,383), Pair(4096,511))
+        }
+    },
     /**
-     * RSA in PKCS1 mode
+     * RSA in the ECB mode with PKCS1 padding
      */
-    RSA_PKCS1("RSA/PKCS1"),
+    RSA_ECB_PKCS1PADDING("RSA/ECB/PKCS1PADDING"){
+        override fun maxDataSize(): Map<Int,Int> {
+            return mapOf(Pair(1024,117),Pair(2048,245), Pair(3072,373), Pair(4096,501))
+        }
+    },
     /**
-     * RSA in the default mode with PKCS1 padding
+     * RSA in the ECB mode with OAEP with SHA1 and MGF1 padding
      */
-    RSA__PKCS1PADDING("RSA//PKCS1PADDING")
+    RSA_ECB_OAEPWithSHA1AndMGF1Padding("RSA/ECB/OAEPWithSHA-1AndMGF1Padding"){
+        override fun maxDataSize(): Map<Int,Int> {
+            return mapOf(Pair(1024,86),Pair(2048,214), Pair(3072,342), Pair(4096,470))
+        }
+    },
+    /**
+     * RSA in the ECB mode with OAEP with SHA256 and MGF1 padding
+     */
+    RSA_ECB_OAEPWithSHA256AndMGF1Padding("RSA/ECB/OAEPWithSHA-256AndMGF1Padding"){
+        override fun maxDataSize(): Map<Int,Int> {
+            return mapOf(Pair(1024,62),Pair(2048,190), Pair(3072,318), Pair(4096,446))
+        }
+    };
 
+    /**
+     * Maximum number of bytes allowed in the data being encrypted.
+     */
+    abstract fun maxDataSize() : Map<Int,Int>
 }

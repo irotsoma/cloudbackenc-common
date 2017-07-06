@@ -15,10 +15,8 @@
  */
 buildscript {
     ext.junitVersion = '4.12'
-    ext.kotlinVersion = '1.1.2'
-    ext.apacheCommonsCompressionVersion = '1.13'
-    ext.jacksonVersion = '2.8.6'
-    ext.dokkaVersion = '0.9.13'
+    ext.kotlinVersion = '1.1.3-2'
+    ext.dokkaVersion = '0.9.15'
 
     repositories {
         mavenCentral()
@@ -34,7 +32,7 @@ buildscript {
 
 }
 plugins {
-    id "com.github.hierynomus.license" version "0.13.1"
+    id 'com.github.hierynomus.license' version '0.14.0'
 }
 
 subprojects {
@@ -111,10 +109,6 @@ subprojects {
 project(':common') {
     group 'com.irotsoma.cloudbackenc'
     apply plugin: 'maven'
-    dependencies {
-        //compression
-        compile "org.apache.commons:commons-compress:$apacheCommonsCompressionVersion"
-    }
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -228,11 +222,6 @@ project(':common:encryptionserviceinterface'){
     dependencies{
         //common classes
         compile project(':common')
-        //jackson
-        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
-        compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
-        compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-        compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
     }
     apply plugin: 'maven'
     uploadArchives {

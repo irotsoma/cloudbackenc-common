@@ -15,7 +15,7 @@
  */
 buildscript {
     ext.junitVersion = '4.12'
-    ext.kotlinVersion = '1.1.3-2'
+    ext.kotlinVersion = '1.1.51'
     ext.dokkaVersion = '0.9.15'
 
     repositories {

@@ -13,27 +13,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-/*
- * Created by irotsoma on 6/20/2016.
- */
-package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
-import com.irotsoma.cloudbackenc.common.ExtensionFactory
+package com.irotsoma.cloudbackenc.common
 
-/**
- * Cloud Service Factory interface
- *
- * @author Justin Zak
- */
-interface CloudServiceFactory: ExtensionFactory {
+import java.util.*
 
+interface ExtensionFactory {
     /**
-     * Instance of CloudServiceAuthenticationService for the cloud service implementation.
+     * Contains the extension UUID pulled from the config json file
      */
-     val authenticationService: CloudServiceAuthenticationService
+    var extensionUuid: UUID
     /**
-     * Instance of CloudServiceFileIOService for the cloud service implementation.
+     * Contains the extension name pulled from the config json file
      */
-     val cloudServiceFileIOService: CloudServiceFileIOService
+    var extensionName: String
 }
-

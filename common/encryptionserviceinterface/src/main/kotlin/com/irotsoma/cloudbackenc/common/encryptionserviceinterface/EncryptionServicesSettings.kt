@@ -13,27 +13,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-/*
- * Created by irotsoma on 6/20/2016.
- */
-package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
-import com.irotsoma.cloudbackenc.common.ExtensionFactory
+package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
 /**
- * Cloud Service Factory interface
+ * Created by irotsoma on 12/19/2017.
  *
- * @author Justin Zak
+ * Configuration object for encryption services.
+ *
  */
-interface CloudServiceFactory: ExtensionFactory {
 
-    /**
-     * Instance of CloudServiceAuthenticationService for the cloud service implementation.
-     */
-     val authenticationService: CloudServiceAuthenticationService
-    /**
-     * Instance of CloudServiceFileIOService for the cloud service implementation.
-     */
-     val cloudServiceFileIOService: CloudServiceFileIOService
+open class EncryptionServicesSettings {
+    lateinit var directory: String
+    lateinit var configFileName: String
+    lateinit var defaultServiceUuid: String
 }
-

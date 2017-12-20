@@ -18,7 +18,7 @@
  */
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
-import java.io.Serializable
+import com.irotsoma.cloudbackenc.common.Extension
 import java.util.*
 
 /**
@@ -29,19 +29,10 @@ import java.util.*
  * @author Justin Zak
 */
 
-class CloudServiceExtension: Serializable {
+class CloudServiceExtension: Extension {
     companion object{
         const val serialVersionUID = 84685165165
     }
-
-    /**
-     * UUID of the cloud service extension from the cloud-service-extension.json
-     */
-    var uuid: UUID
-    /**
-     * Human readable name of service
-     */
-    var name: String
     /**
      * Token for the application to access the cloud service provider (if needed to be stored by client rather than
      * server).
@@ -60,9 +51,7 @@ class CloudServiceExtension: Serializable {
     /**
      * Initialize the extension object with a random UUID and empty name
      */
-    constructor(){
-        this.uuid = UUID.randomUUID()
-        name = ""
+    constructor(): super(UUID.randomUUID(),""){
         token = ""
         requiresUsername = false
         requiresPassword = false
@@ -71,9 +60,7 @@ class CloudServiceExtension: Serializable {
     /**
      * Initialize the extension object with the uuid and name of the extension
      */
-    constructor(uuid: UUID, name: String){
-        this.uuid = uuid
-        this.name = name
+    constructor(uuid: UUID, name: String): super(uuid,name){
         token = ""
         requiresUsername = false
         requiresPassword = false
@@ -82,9 +69,7 @@ class CloudServiceExtension: Serializable {
      * Initialize the extension object with the uuid, name of the extension, and flags for requires username and/or
      * password
      */
-    constructor(uuid: UUID, name: String, requiresUsername: Boolean, requiresPassword: Boolean){
-        this.uuid = uuid
-        this.name = name
+    constructor(uuid: UUID, name: String, requiresUsername: Boolean, requiresPassword: Boolean): super(uuid,name){
         token = ""
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
@@ -92,10 +77,8 @@ class CloudServiceExtension: Serializable {
     /**
      * Initialize the extension object with the uuid, name, and authorization token
      */
-    constructor(uuid: UUID, name: String, token: String){
+    constructor(uuid: UUID, name: String, token: String):super(uuid, name){
         this.token = token
-        this.uuid = uuid
-        this.name = name
         requiresUsername = false
         requiresPassword = false
     }
@@ -103,10 +86,8 @@ class CloudServiceExtension: Serializable {
      * Initialize the extension object with the uuid, name, authorization token, and flags for requires username and/or
      * password
      */
-    constructor(uuid: UUID, name: String, token: String, requiresUsername: Boolean, requiresPassword: Boolean){
+    constructor(uuid: UUID, name: String, token: String, requiresUsername: Boolean, requiresPassword: Boolean): super(uuid,name){
         this.token = token
-        this.uuid = uuid
-        this.name = name
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
     }
@@ -116,10 +97,10 @@ class CloudServiceExtension: Serializable {
      * same.
      */
     override fun equals(other: Any?): Boolean {
-        if (other !is CloudServiceExtension){
-            return false
+        return if (other !is CloudServiceExtension){
+            false
         } else {
-            return (other.uuid == this.uuid) && (other.name == this.name)
+            (other.uuid == this.uuid) && (other.name == this.name)
         }
     }
 

@@ -13,12 +13,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-/*
- * Created by irotsoma on 8/18/2016.
- */
-package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
-import com.irotsoma.cloudbackenc.common.ExtensionConfig
+package com.irotsoma.cloudbackenc.common
 
 /**
  * Encryption Service Extension configuration class populated by encryption-service-extension.json from the extension's resources
@@ -30,4 +26,8 @@ import com.irotsoma.cloudbackenc.common.ExtensionConfig
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
-class EncryptionServiceExtensionConfig : ExtensionConfig
+open class ExtensionConfig(val serviceUuid: String,
+                          val serviceName: String,
+                          val packageName: String,
+                          val factoryClass: String,
+                          val releaseVersion: Int)

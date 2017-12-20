@@ -15,8 +15,10 @@
  */
 buildscript {
     ext.junitVersion = '4.12'
-    ext.kotlinVersion = '1.1.51'
+    ext.kotlinVersion = '1.2.10'
     ext.dokkaVersion = '0.9.15'
+    ext.kotlinLoggingVersion = '1.4.8'
+    ext.jacksonVersion='2.9.3'
 
     repositories {
         mavenCentral()
@@ -52,6 +54,7 @@ subprojects {
     dependencies {
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         compile "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+        //test
         testCompile "junit:junit:$junitVersion"
     }
     sourceSets {
@@ -109,6 +112,12 @@ subprojects {
 project(':common') {
     group 'com.irotsoma.cloudbackenc'
     apply plugin: 'maven'
+    dependencies{
+        //logging
+        compile "io.github.microutils:kotlin-logging:$kotlinLoggingVersion"
+        //jackson
+        compile "com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion"
+    }
     uploadArchives {
         repositories {
             mavenDeployer {

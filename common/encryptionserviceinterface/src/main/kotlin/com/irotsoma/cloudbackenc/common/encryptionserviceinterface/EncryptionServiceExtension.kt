@@ -18,6 +18,7 @@
  */
 package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
+import com.irotsoma.cloudbackenc.common.Extension
 import java.util.*
 
 /**
@@ -25,19 +26,18 @@ import java.util.*
  *
  * @author Justin Zak
  */
-class EncryptionServiceExtension {
+class EncryptionServiceExtension: Extension {
+    companion object{
+        const val serialVersionUID = 955147875125
+    }
     /**
-     * UUID of the encryption service extension from the encryption-service-extension.json
+     * Initialize the extension with a random UUID and no name
      */
-    var uuid: UUID = UUID.randomUUID()
-    /**
-     * Human readable name of service
-     */
-    var name: String = ""
+    constructor():super(UUID.randomUUID(),"")
     /**
      * Initialize the extension object with the uuid and name of the extension
      */
-    constructor(uuid: UUID, name: String){
+    constructor(uuid: UUID, name: String):super(uuid,name){
         this.uuid = uuid
         this.name = name
     }

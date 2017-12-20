@@ -18,12 +18,14 @@
  */
 package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
+import com.irotsoma.cloudbackenc.common.ExtensionFactory
+
 /**
  * Encryption Service Factory interface
  *
  * @author Justin Zak
  */
-interface EncryptionServiceFactory {
+interface EncryptionServiceFactory: ExtensionFactory {
     /**
      * List of key algorithms that the extension supports
      *

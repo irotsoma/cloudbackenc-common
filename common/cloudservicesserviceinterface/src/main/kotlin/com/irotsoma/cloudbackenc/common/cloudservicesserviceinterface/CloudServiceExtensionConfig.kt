@@ -18,6 +18,8 @@
  */
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
+import com.irotsoma.cloudbackenc.common.ExtensionConfig
+
 /**
  * Cloud Service Extension configuration class
  *
@@ -32,12 +34,13 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
  * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  */
-data class CloudServiceExtensionConfig(
-        val serviceUuid: String,
-        val serviceName: String,
-        val packageName: String,
-        val factoryClass: String,
+class CloudServiceExtensionConfig(
+        serviceUuid: String,
+        serviceName: String,
+        packageName: String,
+        factoryClass: String,
+        releaseVersion: Int,
         val requiresUsername: Boolean,
-        val requiresPassword: Boolean,
-        val releaseVersion: Int)
+        val requiresPassword: Boolean
+        ): ExtensionConfig(serviceUuid,serviceName,packageName,factoryClass,releaseVersion)
 

@@ -16,6 +16,9 @@
 
 package com.irotsoma.cloudbackenc.common
 
+import java.util.*
+import kotlin.reflect.KClass
+
 /**
  * Encryption Service Extension configuration class populated by encryption-service-extension.json from the extension's resources
  *
@@ -26,8 +29,27 @@ package com.irotsoma.cloudbackenc.common
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
-open class ExtensionConfig(val serviceUuid: String,
-                          val serviceName: String,
-                          val packageName: String,
-                          val factoryClass: String,
-                          val releaseVersion: Int)
+open class ExtensionConfig(){
+    var serviceUuid: String? = null
+    var serviceName: String? = null
+    var packageName: String? = null
+    var factoryClass: String? = null
+    var releaseVersion: Int= 0
+
+    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int):this(){
+        this.serviceUuid=serviceUuid
+        this.serviceName=serviceName
+        this.packageName=packageName
+        this.factoryClass=factoryClass
+        this.releaseVersion=releaseVersion
+    }
+    /**
+     * Override this if adding more fields to a customized extension object
+     */
+    inline fun <reified T: ExtensionFactory> generateExtension(extensionFactory: KClass<T>): Extension<T> {
+        if (serviceName == null){
+            throw NullPointerException("serviceName can not be empty while generating Extension object.")
+        }
+        return Extension<T>(UUID.fromString(serviceUuid), serviceName!!, releaseVersion, extensionFactory)
+    }
+}

@@ -22,6 +22,7 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
 import java.io.File
 import java.io.InputStream
 import java.nio.file.Path
+import java.util.*
 
 /**
  * Abstract class for Cloud Service IO operations
@@ -29,7 +30,7 @@ import java.nio.file.Path
  * @author Justin Zak
  * @property factory An instance of the CloudServiceFactory holding this class
  */
-abstract class CloudServiceFileIOService(var factory: CloudServiceFactory) {
+abstract class CloudServiceFileIOService(var extensionUUID: UUID) {
     /**
      * Implement to upload a file to a cloud service provider.
      *

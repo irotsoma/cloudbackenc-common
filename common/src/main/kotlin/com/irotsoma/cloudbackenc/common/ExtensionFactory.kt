@@ -18,13 +18,6 @@ package com.irotsoma.cloudbackenc.common
 
 import java.util.*
 
-interface ExtensionFactory {
-    /**
-     * Contains the extension UUID pulled from the config json file
-     */
-    var extensionUuid: UUID
-    /**
-     * Contains the extension name pulled from the config json file
-     */
-    var extensionName: String
+interface ExtensionFactory{
+    val extensionUuid:UUID
 }

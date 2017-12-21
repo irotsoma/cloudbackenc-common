@@ -20,25 +20,15 @@ package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
 import com.irotsoma.cloudbackenc.common.Extension
 import java.util.*
+import kotlin.reflect.KClass
 
 /**
  * Encryption Service Extension Object
  *
  * @author Justin Zak
  */
-class EncryptionServiceExtension: Extension {
+class EncryptionServiceExtension(uuid:UUID, name:String,version:Int,factoryClass: KClass<EncryptionServiceFactory>): Extension<EncryptionServiceFactory>(uuid,name,version,factoryClass){
     companion object{
-        const val serialVersionUID = 955147875125
-    }
-    /**
-     * Initialize the extension with a random UUID and no name
-     */
-    constructor():super(UUID.randomUUID(),"")
-    /**
-     * Initialize the extension object with the uuid and name of the extension
-     */
-    constructor(uuid: UUID, name: String):super(uuid,name){
-        this.uuid = uuid
-        this.name = name
+        const val serialVersionUID = 846518974
     }
 }

@@ -30,4 +30,4 @@ import com.irotsoma.cloudbackenc.common.ExtensionConfig
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
-class EncryptionServiceExtensionConfig : ExtensionConfig
+class EncryptionServiceExtensionConfig : ExtensionConfig()

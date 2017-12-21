@@ -26,6 +26,7 @@ import java.net.URL
 import java.net.URLClassLoader
 import java.util.*
 import java.util.jar.JarFile
+import kotlin.reflect.KClass
 
 /**
  * Created by irotsoma on 12/19/2017.
@@ -34,28 +35,30 @@ import java.util.jar.JarFile
  */
 
 
-abstract class ExtensionRepository <E:Extension, EC:ExtensionConfig>{
+abstract class ExtensionRepository{
     /** kotlin-logging implementation*/
     companion object: KLogging()
-    var encryptionServiceExtensions = emptyMap<UUID,Class<ExtensionFactory>>()
-    var encryptionServiceNames = ArrayList<E>()
-    var encryptionServicesSettings: ExtensionSettings? = null
-    var parentClassLoader: ClassLoader? = null
+    var extensions = emptyMap<UUID,Extension<ExtensionFactory>>()
+    abstract var extensionSettings: ExtensionSettings
+    abstract var parentClassLoader: ClassLoader
 
-
-    fun parseConfig(jsonValues: String) : EC {
-        val mapper: ExtensionConfig = ObjectMapper().registerModule(KotlinModule()).readValue(jsonValues)
-        return mapper
+    /**
+     * Generates an Extension Config object.
+     *
+     * Override this if using a customized extension configuration file format
+     */
+    fun createExtensionConfig(jsonConfig: String) : ExtensionConfig {
+        return ObjectMapper().registerModule(KotlinModule()).readValue(jsonConfig)
     }
 
 
 
-    fun loadDynamicServices() {
+    inline fun <reified T: ExtensionFactory> loadDynamicServices() {
         if (parentClassLoader==null){
             throw NullPointerException("The value of parentClassLoader must be set before calling loadDynamicServices().")
         }
         //external config extension directory
-        val extensionsDirectory: File? = File(encryptionServicesSettings?.directory)
+        val extensionsDirectory: File? = File(extensionSettings?.directory)
         //internal resources extension directory (packaged extensions or test extensions)
         val resourcesExtensionsDirectory: File? =
             try{
@@ -70,39 +73,31 @@ abstract class ExtensionRepository <E:Extension, EC:ExtensionConfig>{
         logger.trace{"Config extension directory:  ${extensionsDirectory?.absolutePath}"}
         logger.trace{"Resources extension directory:  ${resourcesExtensionsDirectory?.absolutePath}"}
         val jarURLs = hashMapOf<UUID,URL>()
-        val factoryClasses = hashMapOf<UUID, VersionedExtensionFactoryClass>()
-
+        val extensionConfigs = hashMapOf<UUID,ExtensionConfig>()
         for (jar in (extensionsDirectory?.listFiles{directory, name -> (!File(directory,name).isDirectory && name.endsWith(".jar"))} ?: arrayOf<File>()).plus(resourcesExtensionsDirectory?.listFiles{directory, name -> (!File(directory,name).isDirectory && name.endsWith(".jar"))} ?: arrayOf<File>())) {
             try {
                 val jarFile = JarFile(jar)
                 //read config file from jar if present
-                val jarFileEntry = jarFile.getEntry(encryptionServicesSettings?.configFileName)
+                val jarFileEntry = jarFile.getEntry(extensionSettings?.configFileName)
                 if (jarFileEntry == null) {
-                    logger.warn{"Extension file missing config file named ${encryptionServicesSettings?.configFileName}. Skipping jar file: ${jar.absolutePath}"}
+                    logger.warn{"Extension file missing config file named ${extensionSettings?.configFileName}. Skipping jar file: ${jar.absolutePath}"}
                 }
                 else {
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
-                    val mapperData= parseConfig(jsonValues)
+                    val config = createExtensionConfig(jsonValues)
+                    val encryptionServiceUUID = UUID.fromString(config.serviceUuid)
                     //add values to maps for consumption later
-                    val encryptionServiceUUID = UUID.fromString(mapperData.serviceUuid)
-
-
-
-
-
-
-                    if (factoryClasses.containsKey(encryptionServiceUUID)){
+                    if (extensionConfigs.containsKey(encryptionServiceUUID)){
                         //if the UUID is already in the map check to see if it's a newer version.  If so replace, the existing one, otherwise ignore the new one.
-                        if (factoryClasses[encryptionServiceUUID]!!.version < mapperData.releaseVersion){
-                            factoryClasses.replace(encryptionServiceUUID, VersionedExtensionFactoryClass("${mapperData.packageName}.${mapperData.factoryClass}", mapperData.releaseVersion))
+                        if (extensionConfigs[encryptionServiceUUID]!!.releaseVersion < config.releaseVersion){
+                            extensionConfigs.replace(encryptionServiceUUID, config)
                             jarURLs.replace(encryptionServiceUUID,jar.toURI().toURL())
                         }
                     } else {
                         //if the UUID is not in the map add it
-                        factoryClasses.put(encryptionServiceUUID, VersionedExtensionFactoryClass("${mapperData.packageName}.${mapperData.factoryClass}", mapperData.releaseVersion))
+                        extensionConfigs.put(encryptionServiceUUID, config)
                         jarURLs.put(encryptionServiceUUID,jar.toURI().toURL())
-                        encryptionServiceNames.add(Extension(encryptionServiceUUID, mapperData.serviceName))
                     }
                 }
             }  catch (e: Exception) {
@@ -115,13 +110,13 @@ abstract class ExtensionRepository <E:Extension, EC:ExtensionConfig>{
             return
         }
         //cycle through all of the classes, make sure they inheritors EncryptionServiceFactory, and add them to the list
-        for ((key, value) in factoryClasses) {
+        for ((key, value) in extensionConfigs) {
             try{
-                val gdClass = classLoader.loadClass(value.canonicalName)
+                val gdClass = classLoader.loadClass("${value.packageName}.${value.factoryClass}")
                 //verify instance of gdClass is a EncryptionServiceFactory
-                if (gdClass.newInstance() is ExtensionFactory) {
-                    //add to list -- suppress warning about unchecked class as we did that in the if statement for an instance but it can't be done directly
-                    encryptionServiceExtensions = encryptionServiceExtensions.plus(Pair(key,(gdClass as Class<ExtensionFactory>)))
+                if (gdClass.newInstance() is T) {
+                    val extension = value.generateExtension(gdClass as KClass<ExtensionFactory>)
+                    extensions = extensions.plus(Pair(key,extension))
                 }
                 else {
                     logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionServiceFactory: $value" }

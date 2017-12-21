@@ -19,6 +19,8 @@
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
 import com.irotsoma.cloudbackenc.common.CloudBackEncUser
+import java.util.*
+
 
 /**
  * Cloud Service Authentication Class
@@ -30,7 +32,7 @@ import com.irotsoma.cloudbackenc.common.CloudBackEncUser
  * @property cloudServiceAuthenticationRefreshListener An instance of a CloudServiceAuthenticationRefreshListener to watch for authentication events.
  */
 
-abstract class CloudServiceAuthenticationService(val factory: CloudServiceFactory)  {
+abstract class CloudServiceAuthenticationService(val extensionUuid: UUID)  {
     abstract var cloudServiceAuthenticationRefreshListener: CloudServiceAuthenticationRefreshListener?
     /**
      * Requests the login status

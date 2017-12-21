@@ -18,8 +18,9 @@ package com.irotsoma.cloudbackenc.common
 
 import java.io.Serializable
 import java.util.*
+import kotlin.reflect.KClass
 
-open class Extension(var uuid:UUID, var name:String): Serializable {
+open class Extension<T: ExtensionFactory>(val uuid:UUID, val name:String, val version:Int, val factoryClass: KClass<T>): Serializable {
     companion object{
         const val serialVersionUID = 41891687891
     }

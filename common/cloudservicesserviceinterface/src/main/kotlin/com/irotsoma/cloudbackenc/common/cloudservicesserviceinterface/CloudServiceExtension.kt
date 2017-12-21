@@ -20,6 +20,7 @@ package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
 import com.irotsoma.cloudbackenc.common.Extension
 import java.util.*
+import kotlin.reflect.KClass
 
 /**
  * Cloud Service Extension object
@@ -29,7 +30,7 @@ import java.util.*
  * @author Justin Zak
 */
 
-class CloudServiceExtension: Extension {
+class CloudServiceExtension<T: CloudServiceFactory>: Extension<T> {
     companion object{
         const val serialVersionUID = 84685165165
     }
@@ -51,7 +52,7 @@ class CloudServiceExtension: Extension {
     /**
      * Initialize the extension object with a random UUID and empty name
      */
-    constructor(): super(UUID.randomUUID(),""){
+    constructor(factory: KClass<T>): super(UUID.randomUUID(),"", 0, factory){
         token = ""
         requiresUsername = false
         requiresPassword = false
@@ -60,7 +61,7 @@ class CloudServiceExtension: Extension {
     /**
      * Initialize the extension object with the uuid and name of the extension
      */
-    constructor(uuid: UUID, name: String): super(uuid,name){
+    constructor(uuid: UUID, name: String, version: Int, factory: KClass<T>): super(uuid,name,version,factory){
         token = ""
         requiresUsername = false
         requiresPassword = false
@@ -69,7 +70,7 @@ class CloudServiceExtension: Extension {
      * Initialize the extension object with the uuid, name of the extension, and flags for requires username and/or
      * password
      */
-    constructor(uuid: UUID, name: String, requiresUsername: Boolean, requiresPassword: Boolean): super(uuid,name){
+    constructor(uuid: UUID, name: String, version: Int, requiresUsername: Boolean, requiresPassword: Boolean, factory: KClass<T>): super(uuid,name,version,factory){
         token = ""
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
@@ -77,7 +78,7 @@ class CloudServiceExtension: Extension {
     /**
      * Initialize the extension object with the uuid, name, and authorization token
      */
-    constructor(uuid: UUID, name: String, token: String):super(uuid, name){
+    constructor(uuid: UUID, name: String, version: Int, token: String, factory: KClass<T>):super(uuid, name,version,factory){
         this.token = token
         requiresUsername = false
         requiresPassword = false
@@ -86,7 +87,7 @@ class CloudServiceExtension: Extension {
      * Initialize the extension object with the uuid, name, authorization token, and flags for requires username and/or
      * password
      */
-    constructor(uuid: UUID, name: String, token: String, requiresUsername: Boolean, requiresPassword: Boolean): super(uuid,name){
+    constructor(uuid: UUID, name: String, version: Int, token: String, requiresUsername: Boolean, requiresPassword: Boolean, factory: KClass<T>): super(uuid,name,version,factory){
         this.token = token
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
@@ -97,19 +98,17 @@ class CloudServiceExtension: Extension {
      * same.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other !is CloudServiceExtension){
+        return if (other !is CloudServiceExtension<*>){
             false
         } else {
-            (other.uuid == this.uuid) && (other.name == this.name)
+            (other.uuid == this.uuid) && (other.name == this.name) && (other.version == this.version)
         }
     }
 
     /**
-     * Generates a hash code based on the UUID and name.
+     * Generates a hash code based on the UUID, name, and version.
      */
     override fun hashCode(): Int {
-        var result = uuid.hashCode()
-        result = 31 * result + name.hashCode()
-        return result
+        return uuid.hashCode() + name.hashCode() + version.hashCode()
     }
 }

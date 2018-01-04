@@ -20,4 +20,5 @@ import java.util.*
 
 interface ExtensionFactory{
     val extensionUuid:UUID
+    val extensionName:String
 }

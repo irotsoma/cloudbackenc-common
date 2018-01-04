@@ -27,7 +27,7 @@ import kotlin.reflect.KClass
  *
  * @author Justin Zak
  */
-class EncryptionServiceExtension(uuid:UUID, name:String,version:Int,factoryClass: KClass<EncryptionServiceFactory>): Extension<EncryptionServiceFactory>(uuid,name,version,factoryClass){
+class EncryptionServiceExtension(uuid:UUID, name:String,version:Int,factoryClass: Class<EncryptionServiceFactory>): Extension<EncryptionServiceFactory>(uuid,name,version,factoryClass){
     companion object{
         const val serialVersionUID = 846518974
     }

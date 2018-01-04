@@ -46,10 +46,10 @@ open class ExtensionConfig(){
     /**
      * Override this if adding more fields to a customized extension object
      */
-    inline fun <reified T: ExtensionFactory> generateExtension(extensionFactory: KClass<T>): Extension<T> {
+    fun <T: ExtensionFactory> generateExtension(extensionFactory: Class<T>): Extension<T> {
         if (serviceName == null){
             throw NullPointerException("serviceName can not be empty while generating Extension object.")
         }
-        return Extension<T>(UUID.fromString(serviceUuid), serviceName!!, releaseVersion, extensionFactory)
+        return Extension(UUID.fromString(serviceUuid), serviceName!!, releaseVersion, extensionFactory)
     }
 }

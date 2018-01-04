@@ -18,22 +18,53 @@
  */
 package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.irotsoma.cloudbackenc.common.ExtensionConfig
 import com.irotsoma.cloudbackenc.common.ExtensionFactory
+import java.util.*
 
 /**
  * Cloud Service Factory interface
  *
  * @author Justin Zak
  */
-interface CloudServiceFactory: ExtensionFactory {
-
+abstract class CloudServiceFactory: ExtensionFactory {
+    companion object {
+        /**
+         * The name of the resource file that contains the extension configuration
+         */
+        private const val EXTENSION_CONFIG_FILE_PATH = "cloud-service-extension.json"
+    }
+    /**
+     * Contains the extension UUID pulled from the config json file
+     */
+    override final val extensionUuid: UUID
+    /**
+     * Contains the extension name pulled from the config json file
+     */
+    override final val extensionName: String
+    /**
+     * Reads the config file to get the UUID and Name of the current extension.
+     */
+    init {
+        //get Json config file data
+        val configFileStream = this::class.java.classLoader.getResourceAsStream(EXTENSION_CONFIG_FILE_PATH)
+        val jsonValue = configFileStream.reader().readText()
+        val mapper = ObjectMapper().registerModule(KotlinModule())
+        val mapperData: CloudServiceExtensionConfig = mapper.readValue(jsonValue)
+        //add values to variables for consumption later
+        extensionUuid = UUID.fromString(mapperData.serviceUuid)
+        extensionName = mapperData.serviceName ?: ""
+    }
     /**
      * Instance of CloudServiceAuthenticationService for the cloud service implementation.
      */
-     val authenticationService: CloudServiceAuthenticationService
+     abstract val authenticationService: CloudServiceAuthenticationService
     /**
      * Instance of CloudServiceFileIOService for the cloud service implementation.
      */
-     val cloudServiceFileIOService: CloudServiceFileIOService
+     abstract val cloudServiceFileIOService: CloudServiceFileIOService
 }
 

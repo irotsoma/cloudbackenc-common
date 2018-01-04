@@ -34,26 +34,26 @@ import kotlin.reflect.KClass
  * Imports and stores information about installed Encryption Service Extensions
  */
 
+//TODO: refactor to register threads using these classes and allow for reloading them when the jar files change
 
-abstract class ExtensionRepository{
+abstract class ExtensionRepository<F: ExtensionFactory, E:Extension<F>>{
     /** kotlin-logging implementation*/
     companion object: KLogging()
-    var extensions = emptyMap<UUID,Extension<ExtensionFactory>>()
-    abstract var extensionSettings: ExtensionSettings
-    abstract var parentClassLoader: ClassLoader
+    var extensions = emptyMap<UUID,E>()
+    var extensionSettings: ExtensionSettings? = null
+    var parentClassLoader: ClassLoader? = null
 
     /**
      * Generates an Extension Config object.
-     *
-     * Override this if using a customized extension configuration file format
      */
-    fun createExtensionConfig(jsonConfig: String) : ExtensionConfig {
+    inline fun <reified C:ExtensionConfig> createExtensionConfig(jsonConfig: String) : C {
         return ObjectMapper().registerModule(KotlinModule()).readValue(jsonConfig)
     }
 
-
-
-    inline fun <reified T: ExtensionFactory> loadDynamicServices() {
+    /**
+     * Must be called by the implementing class to load the extensions.
+     */
+    inline fun <reified F:ExtensionFactory, reified C: ExtensionConfig> loadDynamicServices() {
         if (parentClassLoader==null){
             throw NullPointerException("The value of parentClassLoader must be set before calling loadDynamicServices().")
         }
@@ -85,7 +85,7 @@ abstract class ExtensionRepository{
                 else {
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
-                    val config = createExtensionConfig(jsonValues)
+                    val config = createExtensionConfig<C>(jsonValues)
                     val encryptionServiceUUID = UUID.fromString(config.serviceUuid)
                     //add values to maps for consumption later
                     if (extensionConfigs.containsKey(encryptionServiceUUID)){
@@ -109,14 +109,14 @@ abstract class ExtensionRepository{
             logger.error { "Unable to create a classloader to load extensions!" }
             return
         }
-        //cycle through all of the classes, make sure they inheritors EncryptionServiceFactory, and add them to the list
+        //cycle through all of the classes, make sure they inherit an ExtensionFactory, and add them to the list
         for ((key, value) in extensionConfigs) {
             try{
                 val gdClass = classLoader.loadClass("${value.packageName}.${value.factoryClass}")
-                //verify instance of gdClass is a EncryptionServiceFactory
-                if (gdClass.newInstance() is T) {
-                    val extension = value.generateExtension(gdClass as KClass<ExtensionFactory>)
-                    extensions = extensions.plus(Pair(key,extension))
+                //verify instance of gdClass is an ExtensionFactory
+                if (gdClass.newInstance() is F) {
+                    val extension = value.generateExtension(gdClass as Class<F>)
+                    extensions = extensions.plus(Pair(key,extension as E))
                 }
                 else {
                     logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionServiceFactory: $value" }

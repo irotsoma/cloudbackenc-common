@@ -18,54 +18,86 @@
  */
 package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.irotsoma.cloudbackenc.common.ExtensionConfig
 import com.irotsoma.cloudbackenc.common.ExtensionFactory
+import java.util.*
 
 /**
  * Encryption Service Factory interface
  *
  * @author Justin Zak
  */
-interface EncryptionServiceFactory: ExtensionFactory {
+abstract class EncryptionServiceFactory: ExtensionFactory {
+    companion object {
+        /**
+         * The name of the resource file that contains the extension configuration
+         */
+        private const val EXTENSION_CONFIG_FILE_PATH = "encryption-service-extension.json"
+    }
+    /**
+     * Contains the extension UUID pulled from the config json file
+     */
+    override final val extensionUuid: UUID
+    /**
+     * Contains the extension name pulled from the config json file
+     */
+    override final val extensionName: String
+    /**
+     * Reads the config file to get the UUID and Name of the current extension.
+     */
+    init {
+        //get Json config file data
+        val configFileStream = this::class.java.classLoader.getResourceAsStream(EXTENSION_CONFIG_FILE_PATH)
+        val jsonValue = configFileStream.reader().readText()
+        val mapper = ObjectMapper().registerModule(KotlinModule())
+        val mapperData: EncryptionServiceExtensionConfig = mapper.readValue(jsonValue)
+        //add values to variables for consumption later
+        extensionUuid = UUID.fromString(mapperData.serviceUuid)
+        extensionName = mapperData.serviceName ?: ""
+    }
     /**
      * List of key algorithms that the extension supports
      *
      * EncryptionServiceSymmetricKeyAlgorithms for list of possible values
      */
-    val supportedSymmetricKeyAlgorithms: Array<EncryptionServiceSymmetricKeyAlgorithms>
+    abstract val supportedSymmetricKeyAlgorithms: Array<EncryptionServiceSymmetricKeyAlgorithms>
     /**
      * List of encryption algorithms that the extension supports
      *
      * EncryptionServiceSymmetricEncryptionAlgorithms for list of possible values
      */
-    val supportedSymmetricEncryptionAlgorithms: Array<EncryptionServiceSymmetricEncryptionAlgorithms>
+    abstract val supportedSymmetricEncryptionAlgorithms: Array<EncryptionServiceSymmetricEncryptionAlgorithms>
     /**
      * List of key algorithms that the extension supports
      *
      * EncryptionServiceSymmetricKeyAlgorithms for list of possible values
      */
-    val supportedAsymmetricKeyAlgorithms: Array<EncryptionServiceAsymmetricKeyAlgorithms>
+    abstract val supportedAsymmetricKeyAlgorithms: Array<EncryptionServiceAsymmetricKeyAlgorithms>
     /**
      * List of encryption algorithms that the extension supports
      *
      * EncryptionServiceSymmetricEncryptionAlgorithms for list of possible values
      */
-    val supportedAsymmetricEncryptionAlgorithms: Array<EncryptionServiceAsymmetricEncryptionAlgorithms>
+    abstract val supportedAsymmetricEncryptionAlgorithms: Array<EncryptionServiceAsymmetricEncryptionAlgorithms>
     /**
      * List of PBKDF Algorithms that the extension supports
      *
      * EncryptionServicePBKDFAlgorithms for list of possible values
      */
-    val supportedPBKDFAlgorithms: Array<EncryptionServicePBKDFAlgorithms>
+    abstract val supportedPBKDFAlgorithms: Array<EncryptionServicePBKDFAlgorithms>
     /**
      * Service that handles generation and processing of encryption keys
      */
-    val encryptionServiceKeyService: EncryptionServiceKeyService
+    abstract val encryptionServiceKeyService: EncryptionServiceKeyService
     /**
      * Service that handles encryption and decryption of files
      */
-    val encryptionServiceFileService: EncryptionServiceFileService
+    abstract val encryptionServiceFileService: EncryptionServiceFileService
     /**
      * Service that handles encryption and decryption of strings
      */
-    val encryptionServiceStringService: EncryptionServiceStringService
+    abstract val encryptionServiceStringService: EncryptionServiceStringService
 }

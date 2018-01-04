@@ -16,17 +16,19 @@
 buildscript {
     ext.junitVersion = '4.12'
     ext.kotlinVersion = '1.2.10'
-    ext.dokkaVersion = '0.9.15'
+    ext.dokkaVersion = '0.9.14'
     ext.kotlinLoggingVersion = '1.4.8'
     ext.jacksonVersion='2.9.3'
 
     repositories {
-        mavenCentral()
         jcenter()
+        gradlePluginPortal()
+        mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"}
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokkaVersion"
+    }
 
     //try to pull repository credentials from either properties or environment variables
     ext.repoUsername = project.hasProperty('ossrhUsername') ? ossrhUsername : System.getenv('ossrhUsername') ?: ''

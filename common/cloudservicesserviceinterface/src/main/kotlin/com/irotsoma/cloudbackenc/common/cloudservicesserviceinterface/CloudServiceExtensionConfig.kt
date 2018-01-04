@@ -34,13 +34,8 @@ import com.irotsoma.cloudbackenc.common.ExtensionConfig
  * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  */
-class CloudServiceExtensionConfig(
-        serviceUuid: String,
-        serviceName: String,
-        packageName: String,
-        factoryClass: String,
-        releaseVersion: Int,
-        val requiresUsername: Boolean,
-        val requiresPassword: Boolean
-        ): ExtensionConfig(serviceUuid,serviceName,packageName,factoryClass,releaseVersion)
+class CloudServiceExtensionConfig(): ExtensionConfig(){
+    var requiresUsername: Boolean = false
+    var requiresPassword: Boolean = false
+}
 

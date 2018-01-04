@@ -20,8 +20,27 @@ import java.io.Serializable
 import java.util.*
 import kotlin.reflect.KClass
 
-open class Extension<T: ExtensionFactory>(val uuid:UUID, val name:String, val version:Int, val factoryClass: Class<T>): Serializable {
+open class Extension(val uuid:UUID, val name:String, val version:Int): Serializable {
     companion object{
         const val serialVersionUID = 41891687891
+    }
+
+    /**
+     * Determines if two instances of Extension are equal by comparing the uuid and name.  Both must be the
+     * same.
+     */
+    override fun equals(other: Any?): Boolean {
+        return if (other !is Extension){
+            false
+        } else {
+            (other.uuid == this.uuid) && (other.name == this.name) && (other.version == this.version)
+        }
+    }
+
+    /**
+     * Generates a hash code based on the UUID, name, and version.
+     */
+    override fun hashCode(): Int {
+        return uuid.hashCode() + name.hashCode() + version.hashCode()
     }
 }

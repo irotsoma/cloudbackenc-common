@@ -26,16 +26,55 @@ import com.irotsoma.cloudbackenc.common.ExtensionConfig
  * Populated by cloud-service-extension.json from the extension's resources.
  *
  * @author Justin Zak
- * @property serviceName Human readable name of service
- * @property serviceUuid Internal UUID of the service from the cloud-service-extension.json file.
- * @property packageName Full package name of the factory class for the service
- * @property factoryClass Name of the factory class for the service
- * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  */
-class CloudServiceExtensionConfig(): ExtensionConfig(){
+class CloudServiceExtensionConfig(): ExtensionConfig() {
     var requiresUsername: Boolean = false
     var requiresPassword: Boolean = false
+
+    constructor(serviceUuid: String, serviceName: String, releaseVersion: Int) : this(){
+        this.serviceUuid = serviceUuid
+        this.serviceName = serviceName
+        this.releaseVersion = releaseVersion
+    }
+
+    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int) : this() {
+        this.serviceUuid = serviceUuid
+        this.serviceName = serviceName
+        this.packageName = packageName
+        this.factoryClass = factoryClass
+        this.releaseVersion = releaseVersion
+    }
+
+    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean) : this() {
+        this.serviceUuid=serviceUuid
+        this.serviceName=serviceName
+        this.packageName=packageName
+        this.factoryClass=factoryClass
+        this.releaseVersion=releaseVersion
+        this.requiresUsername = requiresUsername
+        this.requiresPassword = requiresPassword
+    }
+
+    /**
+     * Determines if two instances of CloudServiceExtensionConfig are equal by comparing the uuid and name.  Both must be the
+     * same.
+     */
+    override fun equals(other: Any?): Boolean {
+        return if (other !is CloudServiceExtensionConfig){
+            false
+        } else {
+            (other.serviceUuid == this.serviceUuid) && (other.serviceName == this.serviceName) && (other.releaseVersion == this.releaseVersion)
+        }
+    }
+
+    /**
+     * Generates a hash code based on the UUID, name, and version.
+     */
+    override fun hashCode(): Int {
+        return (serviceUuid?.hashCode() ?:0) + (serviceName?.hashCode() ?:0) + releaseVersion.hashCode()
+    }
 }
+
 

@@ -24,10 +24,5 @@ import com.irotsoma.cloudbackenc.common.ExtensionConfig
  * Encryption Service Extension configuration class populated by encryption-service-extension.json from the extension's resources
  *
  * @author Justin Zak
- * @property serviceName Human readable name of service
- * @property serviceUuid Internal UUID of the service
- * @property packageName Full package name of the factory class for the service
- * @property factoryClass Name of the factory class for the service
- * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
 class EncryptionServiceExtensionConfig : ExtensionConfig()

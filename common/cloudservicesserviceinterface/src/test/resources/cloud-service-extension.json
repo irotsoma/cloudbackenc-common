@@ -1,0 +1,9 @@
+{
+  "serviceUuid": "5ed18eb3-a06c-4fa4-bb98-eebf5b2fa116",
+  "serviceName": "Test",
+  "packageName": "com.irotsoma.cloudbackenc.cloudservice",
+  "factoryClass": "CloudServiceFactoryTest.CloudServiceFactoryImplementation",
+  "requiresUsername": false,
+  "requiresPassword": false,
+  "releaseVersion" : 1
+}

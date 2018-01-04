@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.reflect.KClass
 
 /**
- * Encryption Service Extension configuration class populated by encryption-service-extension.json from the extension's resources
+ * Base Service Extension configuration class populated by json from the extension's resources
  *
  * @author Justin Zak
  * @property serviceName Human readable name of service
@@ -29,9 +29,9 @@ import kotlin.reflect.KClass
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
-open class ExtensionConfig(){
-    var serviceUuid: String? = null
-    var serviceName: String? = null
+abstract class ExtensionConfig(){
+    var serviceUuid: String = ""
+    var serviceName: String = ""
     var packageName: String? = null
     var factoryClass: String? = null
     var releaseVersion: Int= 0
@@ -42,14 +42,5 @@ open class ExtensionConfig(){
         this.packageName=packageName
         this.factoryClass=factoryClass
         this.releaseVersion=releaseVersion
-    }
-    /**
-     * Override this if adding more fields to a customized extension object
-     */
-    fun <T: ExtensionFactory> generateExtension(extensionFactory: Class<T>): Extension<T> {
-        if (serviceName == null){
-            throw NullPointerException("serviceName can not be empty while generating Extension object.")
-        }
-        return Extension(UUID.fromString(serviceUuid), serviceName!!, releaseVersion, extensionFactory)
     }
 }

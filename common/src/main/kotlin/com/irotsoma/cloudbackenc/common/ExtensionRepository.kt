@@ -36,20 +36,13 @@ import kotlin.reflect.KClass
 
 //TODO: refactor to register threads using these classes and allow for reloading them when the jar files change
 
-abstract class ExtensionRepository<F: ExtensionFactory, E:Extension<F>>{
+abstract class ExtensionRepository{
     /** kotlin-logging implementation*/
     companion object: KLogging()
-    var extensions = emptyMap<UUID,E>()
+    var extensions = hashMapOf<UUID,Class<out ExtensionFactory>>()
+    var extensionConfigs = hashMapOf<UUID,ExtensionConfig>()
     var extensionSettings: ExtensionSettings? = null
     var parentClassLoader: ClassLoader? = null
-
-    /**
-     * Generates an Extension Config object.
-     */
-    inline fun <reified C:ExtensionConfig> createExtensionConfig(jsonConfig: String) : C {
-        return ObjectMapper().registerModule(KotlinModule()).readValue(jsonConfig)
-    }
-
     /**
      * Must be called by the implementing class to load the extensions.
      */
@@ -73,7 +66,6 @@ abstract class ExtensionRepository<F: ExtensionFactory, E:Extension<F>>{
         logger.trace{"Config extension directory:  ${extensionsDirectory?.absolutePath}"}
         logger.trace{"Resources extension directory:  ${resourcesExtensionsDirectory?.absolutePath}"}
         val jarURLs = hashMapOf<UUID,URL>()
-        val extensionConfigs = hashMapOf<UUID,ExtensionConfig>()
         for (jar in (extensionsDirectory?.listFiles{directory, name -> (!File(directory,name).isDirectory && name.endsWith(".jar"))} ?: arrayOf<File>()).plus(resourcesExtensionsDirectory?.listFiles{directory, name -> (!File(directory,name).isDirectory && name.endsWith(".jar"))} ?: arrayOf<File>())) {
             try {
                 val jarFile = JarFile(jar)
@@ -85,7 +77,7 @@ abstract class ExtensionRepository<F: ExtensionFactory, E:Extension<F>>{
                 else {
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
-                    val config = createExtensionConfig<C>(jsonValues)
+                    val config: C = ObjectMapper().registerModule(KotlinModule()).readValue(jsonValues)
                     val encryptionServiceUUID = UUID.fromString(config.serviceUuid)
                     //add values to maps for consumption later
                     if (extensionConfigs.containsKey(encryptionServiceUUID)){
@@ -115,8 +107,7 @@ abstract class ExtensionRepository<F: ExtensionFactory, E:Extension<F>>{
                 val gdClass = classLoader.loadClass("${value.packageName}.${value.factoryClass}")
                 //verify instance of gdClass is an ExtensionFactory
                 if (gdClass.newInstance() is F) {
-                    val extension = value.generateExtension(gdClass as Class<F>)
-                    extensions = extensions.plus(Pair(key,extension as E))
+                    extensions.put(key,gdClass as Class<F>)
                 }
                 else {
                     logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionServiceFactory: $value" }

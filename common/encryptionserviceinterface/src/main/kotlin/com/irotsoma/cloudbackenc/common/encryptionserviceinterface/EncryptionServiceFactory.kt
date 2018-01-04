@@ -46,6 +46,10 @@ abstract class EncryptionServiceFactory: ExtensionFactory {
      */
     override final val extensionName: String
     /**
+     * Contains the version of the extension pulled from the config json file
+     */
+    override final val extensionVersion: Int
+    /**
      * Reads the config file to get the UUID and Name of the current extension.
      */
     init {
@@ -56,7 +60,8 @@ abstract class EncryptionServiceFactory: ExtensionFactory {
         val mapperData: EncryptionServiceExtensionConfig = mapper.readValue(jsonValue)
         //add values to variables for consumption later
         extensionUuid = UUID.fromString(mapperData.serviceUuid)
-        extensionName = mapperData.serviceName ?: ""
+        extensionName = mapperData.serviceName
+        extensionVersion = mapperData.releaseVersion
     }
     /**
      * List of key algorithms that the extension supports

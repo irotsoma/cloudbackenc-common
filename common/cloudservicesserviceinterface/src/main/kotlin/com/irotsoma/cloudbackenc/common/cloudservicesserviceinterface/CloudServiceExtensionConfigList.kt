@@ -14,15 +14,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 /*
- * Created by irotsoma on 8/18/2016.
+ * Created by irotsoma on 7/12/2016.
  */
-package com.irotsoma.cloudbackenc.common.encryptionserviceinterface
+package com.irotsoma.cloudbackenc.common.cloudservicesserviceinterface
 
+import java.io.Serializable
 import java.util.*
 
 /**
- * Object for passing a list of Encryption Service Extensions through an API
+ * Object for passing a list of Cloud Service Extensions through a REST API
  *
  * @author Justin Zak
  */
-class EncryptionServiceExtensionList : ArrayList<EncryptionServiceExtension>()
+class CloudServiceExtensionConfigList() : Serializable, ArrayList<CloudServiceExtensionConfig>() {
+    companion object {
+        const val serialVersionUID = 84685165165
+    }
+    constructor(arrayList: List<CloudServiceExtensionConfig>) : this(){
+        for (extension in arrayList){
+            this.add(extension)
+        }
+    }
+}

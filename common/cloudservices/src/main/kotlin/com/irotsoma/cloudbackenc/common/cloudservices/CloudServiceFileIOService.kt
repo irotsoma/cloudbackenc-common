@@ -28,9 +28,9 @@ import java.util.*
  * Abstract class for Cloud Service IO operations
  *
  * @author Justin Zak
- * @property factory An instance of the CloudServiceFactory holding this class
+ * @property extensionUuid The UUID of the current extension.
  */
-abstract class CloudServiceFileIOService(var extensionUUID: UUID) {
+abstract class CloudServiceFileIOService(var extensionUuid: UUID) {
     /**
      * Implement to upload a file to a cloud service provider.
      *

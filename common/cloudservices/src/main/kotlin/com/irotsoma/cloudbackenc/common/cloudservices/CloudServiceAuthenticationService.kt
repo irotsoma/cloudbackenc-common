@@ -28,7 +28,7 @@ import java.util.*
  * Abstract class that should be implemented with logic for authorization flows for a cloud service extension.
  *
  * @author Justin Zak
- * @property factory An instance of the CloudServiceFactory holding this class
+ * @property extensionUuid The UUID of the current extension.
  * @property cloudServiceAuthenticationRefreshListener An instance of a CloudServiceAuthenticationRefreshListener to watch for authentication events.
  */
 
@@ -37,6 +37,7 @@ abstract class CloudServiceAuthenticationService(val extensionUuid: UUID)  {
     /**
      * Requests the login status
      * @param cloudServiceUser A CloudServiceUser object whose status is requested
+     * @param cloudBackEncUser Internal CloudBackEncUser that is logged in.  Used for persistent credential storage.
      * @return True if user is currently logged in to the cloud service. Otherwise, false.
      */
     abstract fun isLoggedIn(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser): Boolean
@@ -50,6 +51,7 @@ abstract class CloudServiceAuthenticationService(val extensionUuid: UUID)  {
     /**
      * Requests the system to log off the cloud service.
      * @param cloudServiceUser A CloudServiceUser object to log out of the cloud service.
+     * @param cloudBackEncUser Internal CloudBackEncUser that is attempting to logout.  Used for persistent credential storage.
      * @return Message returned from the cloud service if applicable.
      */
     abstract fun logout(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE

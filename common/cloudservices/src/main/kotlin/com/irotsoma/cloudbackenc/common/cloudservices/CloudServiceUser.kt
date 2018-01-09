@@ -24,7 +24,7 @@ package com.irotsoma.cloudbackenc.common.cloudservices
  * @author Justin Zak
  * @property username User ID for the service
  * @property password Password for the service (only for login, and only if the service has no external authorization page, should be null otherwise)
- * @property serviceUuid UUID for the cloud service extension.  Defined by the extension author as part of a cloud-service-extension.json file under resources.
+ * @property extensionUuid UUID for the cloud service extension.  Defined by the extension author as part of a cloud-service-extension.json file under resources.
  * @property authorizationCallbackURL Use only if state = AWAITING_AUTHORIZATION.  A browser with this URL should be opened for the user to authorize the service.
  */
 class CloudServiceUser(
@@ -32,7 +32,7 @@ class CloudServiceUser(
         //val internalUsername: String,
         //TODO: Store password as a sealed object or similar
         val password:String?,
-        val serviceUuid: String,
+        val extensionUuid: String,
         val authorizationCallbackURL: String?){
     /**
      * Enum describing the various states of user authorization.

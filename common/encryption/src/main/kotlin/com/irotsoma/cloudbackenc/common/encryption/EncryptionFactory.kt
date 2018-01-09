@@ -58,8 +58,8 @@ abstract class EncryptionFactory : ExtensionFactory {
         val mapper = ObjectMapper().registerModule(KotlinModule())
         val mapperData: EncryptionExtension = mapper.readValue(jsonValue)
         //add values to variables for consumption later
-        extensionUuid = UUID.fromString(mapperData.serviceUuid)
-        extensionName = mapperData.serviceName
+        extensionUuid = UUID.fromString(mapperData.extensionUuid)
+        extensionName = mapperData.extensionName
         extensionVersion = mapperData.releaseVersion
     }
     /**

@@ -78,8 +78,8 @@ abstract class CloudServiceFactory: ExtensionFactory, Serializable
         val mapper = ObjectMapper().registerModule(KotlinModule())
         val mapperData: CloudServiceExtension = mapper.readValue(jsonValue)
         //add values to variables for consumption later
-        extensionUuid = UUID.fromString(mapperData.serviceUuid)
-        extensionName = mapperData.serviceName ?: ""
+        extensionUuid = UUID.fromString(mapperData.extensionUuid)
+        extensionName = mapperData.extensionName
         extensionVersion = mapperData.releaseVersion
         requiresUsername = mapperData.requiresUsername
         requiresPassword = mapperData.requiresPassword

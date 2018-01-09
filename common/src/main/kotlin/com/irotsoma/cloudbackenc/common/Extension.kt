@@ -20,22 +20,22 @@ package com.irotsoma.cloudbackenc.common
  * Base Service Extension configuration class populated by json from the extension's resources
  *
  * @author Justin Zak
- * @property serviceName Human readable name of service
- * @property serviceUuid Internal UUID of the service
+ * @property extensionName Human readable name of service
+ * @property extensionUuid Internal UUID of the service
  * @property packageName Full package name of the factory class for the service
  * @property factoryClass Name of the factory class for the service
  * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
  */
 abstract class Extension(){
-    var serviceUuid: String = ""
-    var serviceName: String = ""
+    var extensionUuid: String = ""
+    var extensionName: String = ""
     var packageName: String? = null
     var factoryClass: String? = null
     var releaseVersion: Int= 0
 
     constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int):this(){
-        this.serviceUuid=serviceUuid
-        this.serviceName=serviceName
+        this.extensionUuid =serviceUuid
+        this.extensionName =serviceName
         this.packageName=packageName
         this.factoryClass=factoryClass
         this.releaseVersion=releaseVersion

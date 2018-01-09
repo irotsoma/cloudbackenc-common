@@ -35,23 +35,26 @@ class CloudServiceExtension(): Extension() {
     var requiresUsername: Boolean = false
     var requiresPassword: Boolean = false
 
-    constructor(serviceUuid: String, serviceName: String, releaseVersion: Int) : this(){
-        this.serviceUuid = serviceUuid
-        this.serviceName = serviceName
+    /**
+     * @param extensionUuid the UUID of the extension
+     */
+    constructor(extensionUuid: String, extensionName: String, releaseVersion: Int) : this(){
+        this.extensionUuid = extensionUuid
+        this.extensionName = extensionName
         this.releaseVersion = releaseVersion
     }
 
-    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int) : this() {
-        this.serviceUuid = serviceUuid
-        this.serviceName = serviceName
+    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int) : this() {
+        this.extensionUuid = extensionUuid
+        this.extensionName = extensionName
         this.packageName = packageName
         this.factoryClass = factoryClass
         this.releaseVersion = releaseVersion
     }
 
-    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean) : this() {
-        this.serviceUuid=serviceUuid
-        this.serviceName=serviceName
+    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean) : this() {
+        this.extensionUuid =extensionUuid
+        this.extensionName =extensionName
         this.packageName=packageName
         this.factoryClass=factoryClass
         this.releaseVersion=releaseVersion
@@ -67,7 +70,7 @@ class CloudServiceExtension(): Extension() {
         return if (other !is CloudServiceExtension){
             false
         } else {
-            (other.serviceUuid == this.serviceUuid) && (other.serviceName == this.serviceName) && (other.releaseVersion == this.releaseVersion)
+            (other.extensionUuid == this.extensionUuid) && (other.extensionName == this.extensionName) && (other.releaseVersion == this.releaseVersion)
         }
     }
 
@@ -75,7 +78,7 @@ class CloudServiceExtension(): Extension() {
      * Generates a hash code based on the UUID, name, and version.
      */
     override fun hashCode(): Int {
-        return (serviceUuid.hashCode()) + (serviceName.hashCode()) + releaseVersion.hashCode()
+        return (extensionUuid.hashCode()) + (extensionName.hashCode()) + releaseVersion.hashCode()
     }
 }
 

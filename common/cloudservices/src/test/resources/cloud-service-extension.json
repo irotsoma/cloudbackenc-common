@@ -1,6 +1,6 @@
 {
-  "serviceUuid": "5ed18eb3-a06c-4fa4-bb98-eebf5b2fa116",
-  "serviceName": "Test",
+  "extensionUuid": "5ed18eb3-a06c-4fa4-bb98-eebf5b2fa116",
+  "extensionName": "Test",
   "packageName": "com.irotsoma.cloudbackenc.cloudservice",
   "factoryClass": "CloudServiceFactoryTest.CloudServiceFactoryImplementation",
   "requiresUsername": false,

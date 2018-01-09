@@ -13,9 +13,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+/*
+ * Created by irotsoma on 10/31/16.
+ */
+package com.irotsoma.cloudbackenc.common.encryption
 
-rootProject.name = 'common-parent'
-include ':common'
-include ':common:cloudservices'
-include ':common:encryption'
-
+/**
+ * An interface to represent an encryption algorithm regardless of whether it is synchronous or asynchronous
+ */
+interface EncryptionAlgorithms

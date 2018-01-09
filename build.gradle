@@ -170,7 +170,7 @@ project(':common') {
     }
 }
 
-project(':common:cloudservicesserviceinterface'){
+project(':common:cloudservices'){
     group 'com.irotsoma.cloudbackenc.common'
     dependencies{
         //common classes
@@ -196,8 +196,8 @@ project(':common:cloudservicesserviceinterface'){
                         artifactId project.name
                         version project.version
 
-                        name 'CloudBackEnc Cloud Service Interfaces'
-                        description 'Cloud service interface library for CloudBackEnc extensions.'
+                        name 'CloudBackEnc Cloud Service Shared Library'
+                        description 'Cloud service library for CloudBackEnc extensions.'
                         url 'https://irotsoma.github.io/cloudbackenc/'
                         licenses{
                             license{
@@ -216,9 +216,9 @@ project(':common:cloudservicesserviceinterface'){
                             }
                         }
                         scm{
-                            connection 'scm:git:git@github.com:irotsoma/cloudbackenc.git'
-                            developerConnection 'scm:git:git@github.com:irotsoma/cloudbackenc.git'
-                            url 'git@github.com:irotsoma/cloudbackenc.git'
+                            connection 'scm:git:git@github.com:irotsoma/cloudbackenc-parent.git'
+                            developerConnection 'scm:git:git@github.com:irotsoma/cloudbackenc-parent.git'
+                            url 'git@github.com:irotsoma/cloudbackenc-parent.git'
                         }
                     }
                 }
@@ -228,7 +228,7 @@ project(':common:cloudservicesserviceinterface'){
 
 }
 
-project(':common:encryptionserviceinterface'){
+project(':common:encryption'){
     group 'com.irotsoma.cloudbackenc.common'
     dependencies{
         //common classes
@@ -254,8 +254,8 @@ project(':common:encryptionserviceinterface'){
                         artifactId project.name
                         version project.version
 
-                        name 'CloudBackEnc Encryption Interfaces'
-                        description 'Encryption service interface library for CloudBackEnc extensions.'
+                        name 'CloudBackEnc Encryption Library'
+                        description 'Encryption library for CloudBackEnc extensions.'
                         url 'https://irotsoma.github.io/cloudbackenc/'
                         licenses{
                             license{
@@ -274,9 +274,9 @@ project(':common:encryptionserviceinterface'){
                             }
                         }
                         scm{
-                            connection 'scm:git:git@github.com:irotsoma/cloudbackenc.git'
-                            developerConnection 'scm:git:git@github.com:irotsoma/cloudbackenc.git'
-                            url 'git@github.com:irotsoma/cloudbackenc.git'
+                            connection 'scm:git:git@github.com:irotsoma/cloudbackenc-parent.git'
+                            developerConnection 'scm:git:git@github.com:irotsoma/cloudbackenc-parent.git'
+                            url 'git@github.com:irotsoma/cloudbackenc-parent.git'
                         }
                     }
                 }

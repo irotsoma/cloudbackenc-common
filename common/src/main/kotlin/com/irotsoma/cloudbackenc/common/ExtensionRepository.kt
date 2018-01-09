@@ -26,7 +26,6 @@ import java.net.URL
 import java.net.URLClassLoader
 import java.util.*
 import java.util.jar.JarFile
-import kotlin.reflect.KClass
 
 /**
  * Created by irotsoma on 12/19/2017.
@@ -40,13 +39,13 @@ abstract class ExtensionRepository{
     /** kotlin-logging implementation*/
     companion object: KLogging()
     var extensions = hashMapOf<UUID,Class<out ExtensionFactory>>()
-    var extensionConfigs = hashMapOf<UUID,ExtensionConfig>()
+    var extensionConfigs = hashMapOf<UUID, Extension>()
     var extensionSettings: ExtensionSettings? = null
     var parentClassLoader: ClassLoader? = null
     /**
      * Must be called by the implementing class to load the extensions.
      */
-    inline fun <reified F:ExtensionFactory, reified C: ExtensionConfig> loadDynamicServices() {
+    inline fun <reified F:ExtensionFactory, reified C: Extension> loadDynamicServices() {
         if (parentClassLoader==null){
             throw NullPointerException("The value of parentClassLoader must be set before calling loadDynamicServices().")
         }
@@ -78,18 +77,18 @@ abstract class ExtensionRepository{
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
                     val config: C = ObjectMapper().registerModule(KotlinModule()).readValue(jsonValues)
-                    val encryptionServiceUUID = UUID.fromString(config.serviceUuid)
+                    val encryptionUUID = UUID.fromString(config.serviceUuid)
                     //add values to maps for consumption later
-                    if (extensionConfigs.containsKey(encryptionServiceUUID)){
+                    if (extensionConfigs.containsKey(encryptionUUID)){
                         //if the UUID is already in the map check to see if it's a newer version.  If so replace, the existing one, otherwise ignore the new one.
-                        if (extensionConfigs[encryptionServiceUUID]!!.releaseVersion < config.releaseVersion){
-                            extensionConfigs.replace(encryptionServiceUUID, config)
-                            jarURLs.replace(encryptionServiceUUID,jar.toURI().toURL())
+                        if (extensionConfigs[encryptionUUID]!!.releaseVersion < config.releaseVersion){
+                            extensionConfigs.replace(encryptionUUID, config)
+                            jarURLs.replace(encryptionUUID,jar.toURI().toURL())
                         }
                     } else {
                         //if the UUID is not in the map add it
-                        extensionConfigs.put(encryptionServiceUUID, config)
-                        jarURLs.put(encryptionServiceUUID,jar.toURI().toURL())
+                        extensionConfigs.put(encryptionUUID, config)
+                        jarURLs.put(encryptionUUID,jar.toURI().toURL())
                     }
                 }
             }  catch (e: Exception) {
@@ -110,7 +109,7 @@ abstract class ExtensionRepository{
                     extensions.put(key,gdClass as Class<F>)
                 }
                 else {
-                    logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionServiceFactory: $value" }
+                    logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionFactory: $value" }
                 }
             } catch(e: ClassNotFoundException){
                 logger.warn{"Error loading encryption service extension: $value: ${e.message}"}

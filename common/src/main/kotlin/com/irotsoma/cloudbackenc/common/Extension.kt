@@ -16,31 +16,28 @@
 
 package com.irotsoma.cloudbackenc.common
 
-import java.io.Serializable
-import java.util.*
-import kotlin.reflect.KClass
+/**
+ * Base Service Extension configuration class populated by json from the extension's resources
+ *
+ * @author Justin Zak
+ * @property serviceName Human readable name of service
+ * @property serviceUuid Internal UUID of the service
+ * @property packageName Full package name of the factory class for the service
+ * @property factoryClass Name of the factory class for the service
+ * @property releaseVersion Incremental version number for the release.  This allows the system to load only the latest version of an extension and is separate from the version name.
+ */
+abstract class Extension(){
+    var serviceUuid: String = ""
+    var serviceName: String = ""
+    var packageName: String? = null
+    var factoryClass: String? = null
+    var releaseVersion: Int= 0
 
-open class Extension(val uuid:UUID, val name:String, val version:Int): Serializable {
-    companion object{
-        const val serialVersionUID = 41891687891
-    }
-
-    /**
-     * Determines if two instances of Extension are equal by comparing the uuid and name.  Both must be the
-     * same.
-     */
-    override fun equals(other: Any?): Boolean {
-        return if (other !is Extension){
-            false
-        } else {
-            (other.uuid == this.uuid) && (other.name == this.name) && (other.version == this.version)
-        }
-    }
-
-    /**
-     * Generates a hash code based on the UUID, name, and version.
-     */
-    override fun hashCode(): Int {
-        return uuid.hashCode() + name.hashCode() + version.hashCode()
+    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int):this(){
+        this.serviceUuid=serviceUuid
+        this.serviceName=serviceName
+        this.packageName=packageName
+        this.factoryClass=factoryClass
+        this.releaseVersion=releaseVersion
     }
 }

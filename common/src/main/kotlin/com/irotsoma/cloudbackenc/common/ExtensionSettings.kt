@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -21,10 +21,14 @@ package com.irotsoma.cloudbackenc.common
  *
  * Configuration object for encryption services.
  *
+ * @author Justin Zak
+ * @property directory The directory that contains the extensions of the implementing class's type
+ * @property configFileName The name of the configuration file in the extension of the implementing class's type
+ * @property defaultExtensionUuid The default extension UUID for extensions of the implementing class's type, if applicable.
  */
 
 abstract class ExtensionSettings {
     lateinit var directory: String
     lateinit var configFileName: String
-    var defaultServiceUuid: String? = null
+    var defaultExtensionUuid: String? = null
 }

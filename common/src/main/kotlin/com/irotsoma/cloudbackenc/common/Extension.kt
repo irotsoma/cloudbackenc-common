@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -33,9 +33,12 @@ abstract class Extension(){
     var factoryClass: String? = null
     var releaseVersion: Int= 0
 
-    constructor(serviceUuid: String, serviceName: String, packageName: String, factoryClass: String, releaseVersion: Int):this(){
-        this.extensionUuid =serviceUuid
-        this.extensionName =serviceName
+    /**
+     * Alternate constructor with all properties as parameters
+     */
+    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int):this(){
+        this.extensionUuid =extensionUuid
+        this.extensionName =extensionName
         this.packageName=packageName
         this.factoryClass=factoryClass
         this.releaseVersion=releaseVersion

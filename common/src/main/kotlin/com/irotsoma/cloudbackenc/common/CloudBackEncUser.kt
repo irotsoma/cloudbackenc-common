@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -38,11 +38,11 @@ class CloudBackEncUser(val username: String,
                        val email: String?,
                        val enabled: Boolean = true,
                        val roles : List<CloudBackEncRoles>) : Serializable{
+    /** Companion Object to hold the static constants */
     companion object{
-        /**
-         * The text that will replace the password when maskedPasswordInstance is called.
-         */
+        /** The text that will replace the password when maskedPasswordInstance is called. */
         const val PASSWORD_MASKED = "PASSWORD_MASKED"
+        /** UID for this class for java's Serializable object */
         const val serialVersionUID = 579846513196
     }
 

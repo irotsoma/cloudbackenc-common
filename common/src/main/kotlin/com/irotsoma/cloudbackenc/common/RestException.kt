@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -26,10 +26,9 @@ package com.irotsoma.cloudbackenc.common
  */
 open class RestException : Exception {
     val type : RestExceptionExceptions
+    /** Companion Object to hold the serialVersionUID */
     companion object {
-        /**
-         * Serialization UID for the custom Exception type
-         */
+        /** Serialization UID for the custom Exception type */
         private const val serialVersionUID : Long = 23452365685674564
     }
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,13 +24,17 @@ import mu.KLogging
 import java.io.File
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.*
+import java.util.UUID
 import java.util.jar.JarFile
 
 /**
- * Created by irotsoma on 12/19/2017.
- *
  * Imports and stores information about installed Encryption Service Extensions
+ *
+ * @author Justin Zak
+ * @property extensions A [HashMap] of the [ExtensionFactory] implementation with the extension's UUID as key
+ * @property extensionConfigs A [HashMap] of the [Extension] implementation which contains metadata from the extension's json configuration with the extension's UUID as the key
+ * @property extensionSettings An [ExtensionSettings] object that contains information about the implementing class's extensions in general
+ * @property parentClassLoader A ClassLoader that is to be used to load the extensions
  */
 
 //TODO: refactor to register threads using these classes and allow for reloading them when the jar files change
@@ -106,6 +110,7 @@ abstract class ExtensionRepository{
                 val gdClass = classLoader.loadClass("${value.packageName}.${value.factoryClass}")
                 //verify instance of gdClass is an ExtensionFactory
                 if (gdClass.newInstance() is F) {
+                    @Suppress("UNCHECKED_CAST") //we've already checked that the class is F in the above if statement, so unchecked cast can be ignored
                     extensions.put(key,gdClass as Class<F>)
                 }
                 else {

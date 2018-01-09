@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,6 +18,14 @@ package com.irotsoma.cloudbackenc.common
 
 import java.util.*
 
+/**
+ * Base interface for the factory class of an extension of any type.
+ *
+ * @author Justin Zak
+ * @property extensionUuid The UUID of the extension.
+ * @property extensionName The human readable name of the extension.
+ * @property extensionVersion The numerical release version of the extension.
+ */
 interface ExtensionFactory{
     val extensionUuid:UUID
     val extensionName:String

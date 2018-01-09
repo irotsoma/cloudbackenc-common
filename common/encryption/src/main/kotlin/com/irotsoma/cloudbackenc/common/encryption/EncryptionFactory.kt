@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -30,11 +30,12 @@ import java.util.*
  * @author Justin Zak
  */
 abstract class EncryptionFactory : ExtensionFactory {
+    /** Companion object to hold the static class constants */
     companion object {
-        /**
-         * The name of the resource file that contains the extension configuration
-         */
+        /** The name of the resource file that contains the extension configuration */
         private const val EXTENSION_CONFIG_FILE_PATH = "encryption-extension.json"
+        /** UID for this class for java's Serializable object */
+        const val serialVersionUID = 91514875
     }
     /**
      * Contains the extension UUID pulled from the config json file
@@ -104,4 +105,23 @@ abstract class EncryptionFactory : ExtensionFactory {
      * Service that handles encryption and decryption of strings
      */
     abstract val encryptionStringService: EncryptionStringService
+
+    /**
+     * Determines if two instances of CloudServiceFactory are equal by comparing the uuid and name.  Both must be the
+     * same.
+     */
+    override fun equals(other: Any?): Boolean {
+        return if (other !is EncryptionFactory){
+            false
+        } else {
+            (other.extensionUuid == this.extensionUuid) && (other.extensionName == this.extensionName) && (other.extensionVersion == this.extensionVersion)
+        }
+    }
+
+    /**
+     * Generates a hash code based on the UUID, name, and version.
+     */
+    override fun hashCode(): Int {
+        return extensionUuid.hashCode() + extensionName.hashCode() + extensionVersion.hashCode()
+    }
 }

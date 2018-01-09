@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -29,7 +29,9 @@ import java.util.*
  */
 class AuthenticationToken(val token: String,
                           val tokenExpiration: Date?) : Serializable {
+    /** Companion Object to hold the serialVersionUID */
     companion object{
+        /** UID for this class for java's Serializable object */
         const val serialVersionUID = 994165165
     }
 }

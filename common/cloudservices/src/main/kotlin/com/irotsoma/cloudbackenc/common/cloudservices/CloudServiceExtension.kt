@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -37,13 +37,21 @@ class CloudServiceExtension(): Extension() {
 
     /**
      * @param extensionUuid the UUID of the extension
+     * @param extensionName the human readable name of the extension
+     * @param releaseVersion the numerical release version of the extension
      */
     constructor(extensionUuid: String, extensionName: String, releaseVersion: Int) : this(){
         this.extensionUuid = extensionUuid
         this.extensionName = extensionName
         this.releaseVersion = releaseVersion
     }
-
+    /**
+     * @param extensionUuid the UUID of the extension
+     * @param extensionName the human readable name of the extension
+     * @param releaseVersion the numerical release version of the extension
+     * @param packageName the package name containing the factory class of the extension
+     * @param factoryClass the name of the factory class for the extension
+     */
     constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int) : this() {
         this.extensionUuid = extensionUuid
         this.extensionName = extensionName
@@ -51,7 +59,15 @@ class CloudServiceExtension(): Extension() {
         this.factoryClass = factoryClass
         this.releaseVersion = releaseVersion
     }
-
+    /**
+     * @param extensionUuid the UUID of the extension
+     * @param extensionName the human readable name of the extension
+     * @param releaseVersion the numerical release version of the extension
+     * @param packageName the package name containing the factory class of the extension
+     * @param factoryClass the name of the factory class for the extension
+     * @param requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
+     * @param requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
+     */
     constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean) : this() {
         this.extensionUuid =extensionUuid
         this.extensionName =extensionName
@@ -83,16 +99,22 @@ class CloudServiceExtension(): Extension() {
 }
 
 /**
- * Object for passing a list of [CloudServiceExtension] through a REST API
+ * Object for passing a list of CloudServiceExtension through a REST API
  *
  * @author Justin Zak
  */
 class CloudServiceExtensionList() : Serializable, ArrayList<CloudServiceExtension>() {
+    /** Companion Object to hold the serialVersionUID */
     companion object {
+        /** UID for this class for java's Serializable object */
         const val serialVersionUID = 84685165165
     }
-    constructor(arrayList: List<CloudServiceExtension>) : this(){
-        for (extension in arrayList){
+
+    /**
+     * @param list A [List] of CloudServiceExtension objects to add to this class
+     */
+    constructor(list: List<CloudServiceExtension>) : this(){
+        for (extension in list){
             this.add(extension)
         }
     }

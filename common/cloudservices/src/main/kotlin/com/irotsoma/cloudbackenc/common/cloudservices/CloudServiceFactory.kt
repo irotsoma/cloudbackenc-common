@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017  Irotsoma, LLC
+ * Copyright (C) 2016-2018  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -32,12 +32,11 @@ import java.util.*
  */
 abstract class CloudServiceFactory: ExtensionFactory, Serializable
 {
+    /** Companion Object to hold the serialVersionUID and config file name */
     companion object {
-        /**
-         * The name of the resource file that contains the extension configuration
-         */
+        /** The name of the resource file that contains the extension configuration */
         const val EXTENSION_CONFIG_FILE_PATH = "cloud-service-extension.json"
-
+        /** UID for this class for java's Serializable object */
         const val serialVersionUID = 84685165165
     }
     /**

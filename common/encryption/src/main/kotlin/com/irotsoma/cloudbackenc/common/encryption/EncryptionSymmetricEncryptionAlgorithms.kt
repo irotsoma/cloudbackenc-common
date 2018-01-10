@@ -31,8 +31,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * AES algorithm using default mode for the library used
      */
     AES("AES"){
-    override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.AES
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -40,8 +42,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * AES algorithm in CBC mode with PKCS5Padding padding algorithm
      */
     AES_CBC_PKCS5Padding("AES/CBC/PKCS5Padding"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.AES
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -49,8 +53,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * AES algorithm in CBC mode with CTS padding algorithm
      */
     AES_CBC_WithCTS("AES/CBC/WithCTS"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.AES
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -58,8 +64,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * AES algorithm in ECB mode with PKCS5Padding padding algorithm
      */
     AES_ECB_PKCS5Padding("AES/ECB/PKCS5Padding"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.AES
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -67,8 +75,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * AES algorithm in ECB mode with CTS padding algorithm
      */
     AES_ECB_WithCTS("AES/ECB/WithCTS"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.AES
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -76,8 +86,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * SKIPJACK algorithm in ECB mode with PKCS7Padding padding algorithm
      */
     SKIPJACK_ECB_PKCS7Padding("SKIPJACK/ECB/PKCS7Padding"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.SKIPJACK
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(64)
         }
     },
@@ -85,8 +97,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * Twofish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
     Twofish_CBC_PKCS5Padding("Twofish/CBC/PKCS5Padding"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.Twofish
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(128)
         }
     },
@@ -94,8 +108,10 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * Blowfish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
     Blowfish_CBC_PKCS5Padding("Blowfish/CBC/PKCS5Padding"){
-        override fun validBlockSizes(): List<Int>
-        {
+        override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
+            return EncryptionSymmetricKeyAlgorithms.Blowfish
+        }
+        override fun validBlockSizes(): List<Int>        {
             return listOf(64)
         }
     };
@@ -108,4 +124,9 @@ enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): Encryptio
      * @return A list of integer values that the user should be allowed to select for the key size of the algorithm.
      */
     abstract fun validBlockSizes() : List<Int>
+
+    /**
+     * The key algorithm to be used with this encryption algorithm
+     **/
+    abstract fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms
 }

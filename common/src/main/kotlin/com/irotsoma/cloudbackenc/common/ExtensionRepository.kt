@@ -20,20 +20,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KLogging
-
 import java.io.File
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.UUID
+import java.util.*
 import java.util.jar.JarFile
 
 /**
  * Imports and stores information about installed Encryption Service Extensions
  *
  * @author Justin Zak
- * @property extensions A [HashMap] of the [ExtensionFactory] implementation with the extension's UUID as key
- * @property extensionConfigs A [HashMap] of the [Extension] implementation which contains metadata from the extension's json configuration with the extension's UUID as the key
- * @property extensionSettings An [ExtensionSettings] object that contains information about the implementing class's extensions in general
+ * @property extensions A HashMap of the ExtensionFactory implementation with the extension's UUID as key
+ * @property extensionConfigs A HashMap of the Extension implementation which contains metadata from the extension's json configuration with the extension's UUID as the key
+ * @property extensionSettings An ExtensionSettings object that contains information about the implementing class's extensions in general
  * @property parentClassLoader A ClassLoader that is to be used to load the extensions
  */
 

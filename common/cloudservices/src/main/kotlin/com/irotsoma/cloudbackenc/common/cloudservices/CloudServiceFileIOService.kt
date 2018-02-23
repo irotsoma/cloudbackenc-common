@@ -44,35 +44,35 @@ abstract class CloudServiceFileIOService(var extensionUuid: UUID) {
     /**
      * Implement to get a list of files and directories from the specified directory on the cloud service.
      *
-     * @param dirPath The path within the cloud service provider for which to return a listing.
+     * @param query A query string for which to return a list. Depending on the provider this may be a path or a search query string.
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return List of CloudServiceFile objects that represents the listing returned by the cloud service
      */
-    abstract fun list(dirPath: String, user: CloudBackEncUser) : List<CloudServiceFile>
+    abstract fun list(query: String, user: CloudBackEncUser) : List<CloudServiceFile>
 
     /**
      * Implement to download a file from the cloud service provider.
      *
-     * @param filePath The path within the cloud service provider for the file to be downloaded.
+     * @param file The CloudServiceFile object representing the file within the cloud service provider to be downloaded.
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return An input stream to the file downloaded.
      */
-    abstract fun download(filePath: String, user: CloudBackEncUser) : InputStream
+    abstract fun download(file: CloudServiceFile, user: CloudBackEncUser) : InputStream
 
     /**
      * Implement to delete a file from the cloud service provider
      *
-     * @param targetPath The path within the cloud service provider for the file or directory to be deleted.
+     * @param targetFile The CloudServiceFile object representing the file within the cloud service provider to be deleted.
      * @param user A CloudBackEncUser object that represents the currently logged in user.
      * @return True if file was successfully deleted.  Otherwise, false.
      */
-    abstract fun delete(targetPath:String, user: CloudBackEncUser) : Boolean
+    abstract fun delete(targetFile: CloudServiceFile, user: CloudBackEncUser) : Boolean
 
     /**
      * Implement to return the current available space on the cloud service provider.
      *
      * @param user A CloudBackEncUser object that represents the currently logged in user.
-     * @return Available space in bytes
+     * @return Available space in bytes, -1 if unlimited, null if unknown or error
      */
-    abstract fun availableSpace(user: CloudBackEncUser):Long
+    abstract fun availableSpace(user: CloudBackEncUser):Long?
 }

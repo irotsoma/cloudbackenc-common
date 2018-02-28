@@ -25,12 +25,14 @@ package com.irotsoma.cloudbackenc.common.cloudservices
  * @property filePath Full path within the cloud service provider used to access the file (including file name)
  * @property fileId Cloud Service identifier for a file (if supported)
  * @property size File size in bytes.
+ * @property hash SHA1 hash of the file.
  */
 data class CloudServiceFile(
         val fileName: String,
         val isDirectory: Boolean = false,
-        val isReadOnly: Boolean = false,
-        val isDownloadable: Boolean = true,
+        val isReadOnly: Boolean?,
+        val isDownloadable: Boolean?,
         val filePath: String?,
         val fileId: String?,
-        val size: Long?)
+        val size: Long?,
+        val hash: String?)

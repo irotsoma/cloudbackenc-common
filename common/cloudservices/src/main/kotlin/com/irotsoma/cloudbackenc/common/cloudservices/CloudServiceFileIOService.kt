@@ -71,8 +71,10 @@ abstract class CloudServiceFileIOService(var extensionUuid: UUID) {
     /**
      * Implement to return the current available space on the cloud service provider.
      *
+     * Note: implementation for if user is over limit should return 0, not a negative number.  Only unlimited should return -1.
+     *
      * @param user A CloudBackEncUser object that represents the currently logged in user.
-     * @return Available space in bytes, -1 if unlimited, null if unknown or error
+     * @return Available space in bytes, -1 if unlimited, null if unknown or error, 0 if user is over limit
      */
     abstract fun availableSpace(user: CloudBackEncUser):Long?
 }

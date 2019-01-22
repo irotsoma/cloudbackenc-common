@@ -108,7 +108,7 @@ abstract class ExtensionRepository{
             try{
                 val gdClass = classLoader.loadClass("${value.packageName}.${value.factoryClass}")
                 //verify instance of gdClass is an ExtensionFactory
-                if (gdClass.newInstance() is F) {
+                if (gdClass.getDeclaredConstructor().newInstance() is F) {
                     @Suppress("UNCHECKED_CAST") //we've already checked that the class is F in the above if statement, so unchecked cast can be ignored
                     extensions.put(key,gdClass as Class<F>)
                 }

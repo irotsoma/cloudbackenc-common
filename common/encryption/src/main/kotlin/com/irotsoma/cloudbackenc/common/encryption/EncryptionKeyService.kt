@@ -93,5 +93,5 @@ interface EncryptionKeyService {
      * @param keySize Size of the keys to generate in bits.
      * @param iterations Number of iterations of the algorithm
      */
-    fun generatePasswordBasedKey(password:String, salt: ByteArray, algorithm: EncryptionPBKDFAlgorithms, keySize: Int, iterations: Int) : SecretKey?
+    fun generatePasswordBasedKey(password:String, salt: ByteArray, algorithm: EncryptionPBKDFEncryptionAlgorithms, keySize: Int, iterations: Int) : SecretKey?
 }

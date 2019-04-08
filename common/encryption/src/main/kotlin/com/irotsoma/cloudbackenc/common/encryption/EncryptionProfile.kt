@@ -24,15 +24,15 @@ import java.util.*
 /**
  * Object representing encryption settings for APIs
  *
- * @param encryptionIsSymmetric true if the encryption algorithm represented by this profile is symmetric, false if asymmetric
- * @param encryptionAlgorithm An instance of [EncryptionSymmetricEncryptionAlgorithms] or [EncryptionAsymmetricEncryptionAlgorithms] that represents the algorithm used by this profile
+ * @param encryptionType The type of encryption used in this profile
+ * @param encryptionAlgorithm An instance of [EncryptionSymmetricEncryptionAlgorithms], [EncryptionAsymmetricEncryptionAlgorithms], or [EncryptionPBKDFEncryptionAlgorithms] that represents the algorithm used by this profile
  * @param encryptionKeyAlgorithm An instance of [EncryptionSymmetricKeyAlgorithms] or [EncryptionAsymmetricKeyAlgorithms] that represents the algorithm used to generate keys for this profile
  * @param encryptionKeySize The key size to use when generating encryption keys
  * @param encryptionBlockSize The block size of the encryption algorithm where applicable. Use null if not applicable
  * @param encryptionServiceUuid The encryption service UUID that should be used by this profile. Null to use default service.
  * @author Justin Zak
  */
-class EncryptionProfile(val encryptionIsSymmetric: Boolean,
+class EncryptionProfile(val encryptionType: EncryptionAlgorithmTypes,
                         val encryptionAlgorithm: EncryptionAlgorithms,
                         val encryptionKeyAlgorithm: EncryptionKeyAlgorithms,
                         val encryptionKeySize: Int?,

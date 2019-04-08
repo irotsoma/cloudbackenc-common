@@ -40,15 +40,15 @@ abstract class EncryptionFactory : ExtensionFactory {
     /**
      * Contains the extension UUID pulled from the config json file
      */
-    override final val extensionUuid: UUID
+    final override val extensionUuid: UUID
     /**
      * Contains the extension name pulled from the config json file
      */
-    override final val extensionName: String
+    final override val extensionName: String
     /**
      * Contains the version of the extension pulled from the config json file
      */
-    override final val extensionVersion: Int
+    final override val extensionVersion: Int
     /**
      * Reads the config file to get the UUID and Name of the current extension.
      */
@@ -90,9 +90,9 @@ abstract class EncryptionFactory : ExtensionFactory {
     /**
      * List of PBKDF Algorithms that the extension supports
      *
-     * EncryptionPBKDFAlgorithms for list of possible values
+     * EncryptionPBKDFEncryptionAlgorithms for list of possible values
      */
-    abstract val supportedPBKDFAlgorithms: Array<EncryptionPBKDFAlgorithms>
+    abstract val supportedPBKDFEncryptionAlgorithms: Array<EncryptionPBKDFEncryptionAlgorithms>
     /**
      * Service that handles generation and processing of encryption keys
      */

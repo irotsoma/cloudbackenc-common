@@ -13,26 +13,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
-/*
- * Created by irotsoma on 8/31/2016.
- */
+
 package com.irotsoma.cloudbackenc.common.encryption
 
-
 /**
- * List of PBKDF2 (Password-Based Key Derivation Function 2) key algorithms that extensions can support.
- *
- * @author Justin Zak
- * @property value The value should be the standard string representations of the algorithms.
+ * The type of encryption
  */
-enum class EncryptionPBKDFAlgorithms(val value: String) {
-    //TODO:  Add more algorithms
+enum class EncryptionAlgorithmTypes {
     /**
-     * PBKDF2 with Hmac using SHA1
+     * Symmetric encryption using a single secret key
      */
-    PBKDF2WithHmacSHA1("PBKDF2WithHmacSHA1"),
+    SYMMETRIC,
     /**
-     * PBKDF2 with Hmac using SHA512
+     * Asymmetric encryption using a pair of keys, public/private
      */
-    PBKDF2WithHmacSHA512("PBKDF2WithHmacSHA512")
+    ASYMMETRIC,
+    /**
+     * Password based encryption without keys
+     */
+    PBKDF
 }

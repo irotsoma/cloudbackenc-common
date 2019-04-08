@@ -24,7 +24,7 @@ package com.irotsoma.cloudbackenc.common.encryption
  * @author Justin Zak
  * @property value The value should be the standard string representations of the algorithms.
  */
-enum class EncryptionAsymmetricEncryptionAlgorithms(val value: String): EncryptionAlgorithms {
+enum class EncryptionAsymmetricEncryptionAlgorithms(override val value: String): EncryptionAlgorithms {
     //TODO:  Add more algorithms and remove insecure ones.
     /**
      * RSA encryption using the default mode for the library used.

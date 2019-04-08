@@ -21,5 +21,10 @@ package com.irotsoma.cloudbackenc.common.encryption
 
 /**
  * An interface to represent an encryption key algorithm regardless of whether it is synchronous or asynchronous
+ *
+ * @property value A string representation of the enum value
+ * @author Justin Zak
  */
-interface EncryptionKeyAlgorithms
+interface EncryptionKeyAlgorithms{
+    val value: String
+}

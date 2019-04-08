@@ -24,7 +24,7 @@ package com.irotsoma.cloudbackenc.common.encryption
  * @author Justin Zak
  * @property value The value should be the standard string representations of the algorithms.
  */
-enum class EncryptionSymmetricEncryptionAlgorithms(val value: String): EncryptionAlgorithms {
+enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): EncryptionAlgorithms {
     //TODO:  Add more algorithms and remove insecure ones.
     // This is just a quick list of algorithms supported by bouncycastle/apache commons crypto
     /**

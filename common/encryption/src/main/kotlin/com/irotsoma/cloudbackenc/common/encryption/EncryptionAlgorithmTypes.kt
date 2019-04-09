@@ -18,18 +18,21 @@ package com.irotsoma.cloudbackenc.common.encryption
 
 /**
  * The type of encryption
+ *
+ * @author Justin Zak
+ * @property value The value should be the standard string representations of the types.
  */
-enum class EncryptionAlgorithmTypes {
+enum class EncryptionAlgorithmTypes(val value: String) {
     /**
      * Symmetric encryption using a single secret key
      */
-    SYMMETRIC,
+    SYMMETRIC("Symmetric"),
     /**
      * Asymmetric encryption using a pair of keys, public/private
      */
-    ASYMMETRIC,
+    ASYMMETRIC("Asymmetric"),
     /**
      * Password based encryption without keys
      */
-    PBKDF
+    PBKDF("PBKDF")
 }

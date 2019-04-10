@@ -48,8 +48,11 @@ subprojects {
     apply plugin: 'signing'
     ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
     signing {
-        required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
+        required { gradle.taskGraph.hasTask("uploadArchives") }
         sign configurations.archives
+    }
+    tasks.withType(Sign) {
+        onlyIf { isReleaseVersion }
     }
     repositories {
         mavenCentral()

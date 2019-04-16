@@ -28,18 +28,18 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
 /**
- * Collection of functions for encrypting and decrypting files.
+ * Collection of functions for encrypting and decrypting streams.
  *
  * @author Justin Zak
  */
-abstract class EncryptionFileService {
+abstract class EncryptionStreamService {
     /**
      * Encryption function implementation to disambiguate between symmetric and asymmetric functions.
      *
-     * @param inputStream Input stream for the file to be encrypted.
-     * @param outputStream Output stream for the file after encryption
-     * @param key Key to be used to encrypt the file.  Must be an instance of SecretKey for symmetric algorithms or PublicKey for asymmetric algorithms.
-     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms or EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the file.  Must match with the appropriate key type.
+     * @param inputStream Input stream for the data to be encrypted.
+     * @param outputStream Output stream for the data after encryption
+     * @param key Key to be used to encrypt the data.  Must be an instance of SecretKey for symmetric algorithms or PublicKey for asymmetric algorithms.
+     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms or EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the data.  Must match with the appropriate key type.
      * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
@@ -54,33 +54,33 @@ abstract class EncryptionFileService {
         }
     }
     /**
-     * Implement to encrypt files using symmetric (secret key) encryption.
+     * Implement to encrypt data streams using symmetric (secret key) encryption.
      *
-     * @param inputStream Input stream for the file to be encrypted.
-     * @param outputStream Output stream for the file after encryption
-     * @param key Secret key to be used to encrypt the file
-     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms to be used to encrypt the file.
+     * @param inputStream Input stream for the data to be encrypted.
+     * @param outputStream Output stream for the data after encryption
+     * @param key Secret key to be used to encrypt the data
+     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms to be used to encrypt the data.
      * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
     abstract fun encrypt(inputStream: InputStream, outputStream: OutputStream, key: SecretKey, algorithm: EncryptionSymmetricEncryptionAlgorithms, ivParameterSpec: IvParameterSpec?, secureRandom: SecureRandom?)
     /**
-     * Implement to encrypt files using asymmetric (public key) encryption.
+     * Implement to encrypt data streams using asymmetric (public key) encryption.
      *
-     * @param inputStream Input stream for the file to be encrypted.
-     * @param outputStream Output stream for the file after encryption
-     * @param key Public key to be used to encrypt the file
-     * @param algorithm Algorithm from EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the file.
+     * @param inputStream Input stream for the data to be encrypted.
+     * @param outputStream Output stream for the data after encryption
+     * @param key Public key to be used to encrypt the data
+     * @param algorithm Algorithm from EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the data.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
     abstract fun encrypt(inputStream: InputStream, outputStream: OutputStream, key: PublicKey, algorithm: EncryptionAsymmetricEncryptionAlgorithms, secureRandom: SecureRandom?)
     /**
      * Decryption function implementation to disambiguate between symmetric and asymmetric functions.
      *
-     * @param inputStream Input stream for the file to be encrypted.
-     * @param outputStream Output stream for the file after encryption
-     * @param key Key to be used to encrypt the file.  Must be an instance of SecretKey for symmetric algorithms or PrivateKey for asymmetric algorithms.
-     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms or EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the file.  Must match with the appropriate key type.
+     * @param inputStream Input stream for the data to be encrypted.
+     * @param outputStream Output stream for the data after encryption
+     * @param key Key to be used to encrypt the data.  Must be an instance of SecretKey for symmetric algorithms or PrivateKey for asymmetric algorithms.
+     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms or EncryptionAsymmetricEncryptionAlgorithms to be used to encrypt the data.  Must match with the appropriate key type.
      * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
@@ -95,23 +95,23 @@ abstract class EncryptionFileService {
         }
     }
     /**
-     * Implement to decrypt files using symmetric (secret key) encryption.
+     * Implement to decrypt data streams using symmetric (secret key) encryption.
      *
-     * @param inputStream Input stream for the file to be decrypted.
-     * @param outputStream Output stream for the file after decryption
-     * @param key Secret key to be used to decrypt the file
-     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms to be used to decrypt the file.
+     * @param inputStream Input stream for the data to be decrypted.
+     * @param outputStream Output stream for the data after decryption
+     * @param key Secret key to be used to decrypt the data
+     * @param algorithm Algorithm from EncryptionSymmetricEncryptionAlgorithms to be used to decrypt the data.
      * @param ivParameterSpec An instance of IvParameterSpec that contains the initialization vector for encryption algorithms that require it.  Use null if not required by the algorithm.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
     abstract fun decrypt(inputStream: InputStream, outputStream: OutputStream, key: SecretKey, algorithm: EncryptionSymmetricEncryptionAlgorithms, ivParameterSpec: IvParameterSpec?, secureRandom: SecureRandom?)
     /**
-     * Implement to decrypt files using asymmetric (public key) encryption.
+     * Implement to decrypt data streams using asymmetric (public key) encryption.
      *
-     * @param inputStream Input stream for the file to be decrypted.
-     * @param outputStream Output stream for the file after decryption
-     * @param key Secret key to be used to decrypt the file
-     * @param algorithm Algorithm from EncryptionAsymmetricEncryptionAlgorithms to be used to decrypt the file.
+     * @param inputStream Input stream for the data to be decrypted.
+     * @param outputStream Output stream for the data after decryption
+     * @param key Secret key to be used to decrypt the data
+     * @param algorithm Algorithm from EncryptionAsymmetricEncryptionAlgorithms to be used to decrypt the data.
      * @param secureRandom An instance of a SecureRandom random number generator.  If not sent, a new one will be generated using the default Java algorithm.  If encrypting or decrypting lots of files or strings, it is recommended to generate the SecureRandom once rather than once per call as it can be a resource intensive operation.
      */
     abstract fun decrypt(inputStream: InputStream, outputStream: OutputStream, key: PrivateKey, algorithm: EncryptionAsymmetricEncryptionAlgorithms, secureRandom: SecureRandom?)

@@ -98,9 +98,9 @@ abstract class EncryptionFactory : ExtensionFactory {
      */
     abstract val encryptionKeyService: EncryptionKeyService
     /**
-     * Service that handles encryption and decryption of files
+     * Service that handles encryption and decryption of data streams
      */
-    abstract val encryptionFileService: EncryptionFileService
+    abstract val encryptionStreamService: EncryptionStreamService
     /**
      * Service that handles encryption and decryption of strings
      */

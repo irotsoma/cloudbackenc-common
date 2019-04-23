@@ -36,7 +36,7 @@ import java.io.Serializable
 class CloudBackEncUser(val username: String,
                        val password : String,
                        val email: String?,
-                       val enabled: Boolean = true,
+                       val enabled: UserAccountState = UserAccountState.ACTIVE,
                        val roles : List<CloudBackEncRoles>) : Serializable{
     /** Companion Object to hold the static constants */
     companion object{

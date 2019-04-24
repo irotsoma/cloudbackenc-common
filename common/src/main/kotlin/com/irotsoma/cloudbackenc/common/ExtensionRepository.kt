@@ -80,18 +80,18 @@ abstract class ExtensionRepository{
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
                     val config: C = ObjectMapper().registerModule(KotlinModule()).readValue(jsonValues)
-                    val encryptionUUID = UUID.fromString(config.extensionUuid)
+                    val extensionUUID = UUID.fromString(config.extensionUuid)
                     //add values to maps for consumption later
-                    if (extensionConfigs.containsKey(encryptionUUID)){
+                    if (extensionConfigs.containsKey(extensionUUID)){
                         //if the UUID is already in the map check to see if it's a newer version.  If so replace, the existing one, otherwise ignore the new one.
-                        if (extensionConfigs[encryptionUUID]!!.releaseVersion < config.releaseVersion){
-                            extensionConfigs.replace(encryptionUUID, config)
-                            jarURLs.replace(encryptionUUID,jar.toURI().toURL())
+                        if (extensionConfigs[extensionUUID]!!.releaseVersion < config.releaseVersion){
+                            extensionConfigs.replace(extensionUUID, config)
+                            jarURLs.replace(extensionUUID,jar.toURI().toURL())
                         }
                     } else {
                         //if the UUID is not in the map add it
-                        extensionConfigs.put(encryptionUUID, config)
-                        jarURLs.put(encryptionUUID,jar.toURI().toURL())
+                        extensionConfigs.put(extensionUUID, config)
+                        jarURLs.put(extensionUUID,jar.toURI().toURL())
                     }
                 }
             }  catch (e: Exception) {

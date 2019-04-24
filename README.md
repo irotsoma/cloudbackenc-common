@@ -1,4 +1,4 @@
-# cloudbackenc-common [![CircleCI](https://circleci.com/gh/irotsoma/cloudbackenc-common.svg?style=svg)](https://circleci.com/gh/irotsoma/cloudbackenc-common)
+# cloudbackenc-common 
 
 Shared Libraries for CloudBackEnc
 

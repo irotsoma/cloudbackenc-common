@@ -18,12 +18,15 @@
  */
 package com.irotsoma.cloudbackenc.common.encryption
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo
+
 /**
  * An interface to represent an encryption algorithm regardless of whether it is synchronous or asynchronous
  *
  * @property value A string representation of the enum value
  * @author Justin Zak
  */
-interface EncryptionAlgorithms{
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "class")
+interface EncryptionAlgorithms {
     val value: String
 }

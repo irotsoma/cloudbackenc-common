@@ -42,15 +42,15 @@ abstract class CloudServiceFactory: ExtensionFactory, Serializable
     /**
      * Contains the extension UUID pulled from the config json file
      */
-    override final val extensionUuid: UUID
+    final override val extensionUuid: UUID
     /**
      * Contains the extension name pulled from the config json file
      */
-    override final val extensionName: String
+    final override val extensionName: String
     /**
      * Contains the version of the extension pulled from the config json file
      */
-    override final val extensionVersion: Int
+    final override val extensionVersion: Int
 
     /**
      * Flag to specify that the client must supply a username
@@ -65,7 +65,10 @@ abstract class CloudServiceFactory: ExtensionFactory, Serializable
      * server).
      */
     var token: String? = null
-
+    /**
+     * Stores any custom settings needed for a cloud service extension
+     */
+    val additionalSettings = HashMap<String, String>()
 
     /**
      * Reads the config file to get the UUID and Name of the current extension.
@@ -82,6 +85,7 @@ abstract class CloudServiceFactory: ExtensionFactory, Serializable
         extensionVersion = mapperData.releaseVersion
         requiresUsername = mapperData.requiresUsername
         requiresPassword = mapperData.requiresPassword
+        additionalSettings.putAll(mapperData.additionalSettings)
     }
     /**
      * Instance of CloudServiceAuthenticationService for the cloud service implementation.

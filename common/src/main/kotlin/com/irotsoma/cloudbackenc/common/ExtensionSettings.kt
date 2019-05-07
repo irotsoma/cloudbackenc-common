@@ -19,7 +19,7 @@ package com.irotsoma.cloudbackenc.common
 /**
  * Created by irotsoma on 12/19/2017.
  *
- * Configuration object for encryption services.
+ * Configuration object for extensions.
  *
  * @author Justin Zak
  * @property directory The directory that contains the extensions of the implementing class's type

@@ -5,5 +5,8 @@
   "factoryClass": "CloudServiceFactoryTest.CloudServiceFactoryImplementation",
   "requiresUsername": false,
   "requiresPassword": false,
-  "releaseVersion" : 1
+  "releaseVersion" : 1,
+  "additionalSettings": {
+    "testSetting": "testvalue"
+  }
 }

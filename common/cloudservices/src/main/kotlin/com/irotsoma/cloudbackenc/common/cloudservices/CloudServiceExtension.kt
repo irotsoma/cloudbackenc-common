@@ -30,10 +30,12 @@ import java.util.*
  * @author Justin Zak
  * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
+ * @property additionalSettings Stores any custom settings needed for a cloud service extension
  */
 class CloudServiceExtension(): Extension() {
     var requiresUsername: Boolean = false
     var requiresPassword: Boolean = false
+    var additionalSettings:HashMap<String, String> = HashMap()
 
     /**
      * @param extensionUuid the UUID of the extension
@@ -79,22 +81,21 @@ class CloudServiceExtension(): Extension() {
     }
 
     /**
-     * Determines if two instances of CloudServiceExtension are equal by comparing the uuid and name.  Both must be the
-     * same.
+     * Determines if two instances of CloudServiceExtension are equal by comparing the uuid and version.  Both must be the same.
      */
     override fun equals(other: Any?): Boolean {
         return if (other !is CloudServiceExtension){
             false
         } else {
-            (other.extensionUuid == this.extensionUuid) && (other.extensionName == this.extensionName) && (other.releaseVersion == this.releaseVersion)
+            (other.extensionUuid == this.extensionUuid) && (other.releaseVersion == this.releaseVersion)
         }
     }
 
     /**
-     * Generates a hash code based on the UUID, name, and version.
+     * Generates a hash code based on the UUID and version.
      */
     override fun hashCode(): Int {
-        return (extensionUuid.hashCode()) + (extensionName.hashCode()) + releaseVersion.hashCode()
+        return (extensionUuid.hashCode()) + releaseVersion.hashCode()
     }
 }
 

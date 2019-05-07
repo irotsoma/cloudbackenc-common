@@ -32,6 +32,7 @@ class CloudServiceFactoryTest {
     fun test(){
         val original = CloudServiceFactoryImplementation()
         assert(original.extensionUuid == expectedUuid) //test loading of json file
+        assert(original.additionalSettings.containsKey("testSetting"))
         val anotherInstance = CloudServiceFactoryImplementation()
         anotherInstance.token = "test" //test that token is not used for determining equality
         assert (original == anotherInstance) //test equality between instances

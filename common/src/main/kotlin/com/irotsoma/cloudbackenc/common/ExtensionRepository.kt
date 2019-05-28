@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import mu.KLogging
+import mu.KotlinLogging
 import java.io.File
 import java.net.URL
 import java.net.URLClassLoader
@@ -49,6 +50,7 @@ abstract class ExtensionRepository{
      * Must be called by the implementing class to load the extensions.
      */
     inline fun <reified F:ExtensionFactory, reified C: Extension> loadDynamicServices() {
+        val logger = KotlinLogging.logger {}
         if (parentClassLoader==null){
             throw NullPointerException("The value of parentClassLoader must be set before calling loadDynamicServices().")
         }
@@ -90,8 +92,8 @@ abstract class ExtensionRepository{
                         }
                     } else {
                         //if the UUID is not in the map add it
-                        extensionConfigs.put(extensionUUID, config)
-                        jarURLs.put(extensionUUID,jar.toURI().toURL())
+                        extensionConfigs[extensionUUID] = config
+                        jarURLs[extensionUUID] = jar.toURI().toURL()
                     }
                 }
             }  catch (e: Exception) {
@@ -110,7 +112,7 @@ abstract class ExtensionRepository{
                 //verify instance of gdClass is an ExtensionFactory
                 if (gdClass.getDeclaredConstructor().newInstance() is F) {
                     @Suppress("UNCHECKED_CAST") //we've already checked that the class is F in the above if statement, so unchecked cast can be ignored
-                    extensions.put(key,gdClass as Class<F>)
+                    extensions[key] = gdClass as Class<F>
                 }
                 else {
                     logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionFactory: $value" }

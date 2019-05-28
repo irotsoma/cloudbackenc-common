@@ -40,7 +40,7 @@ import java.util.jar.JarFile
 
 abstract class ExtensionRepository{
     /** kotlin-logging implementation*/
-    companion object: KLogging()
+    private companion object: KLogging()
     var extensions = hashMapOf<UUID,Class<out ExtensionFactory>>()
     var extensionConfigs = hashMapOf<UUID, Extension>()
     var extensionSettings: ExtensionSettings? = null

@@ -29,7 +29,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when attempting to create a user with a user ID that already exists.
      */
-    Duplicate_User{
+    DUPLICATE_USER{
         override fun httpStatusCode(): Int{
             return 400
         }
@@ -37,7 +37,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when attempting to access a URL under /cloud-service with an invalid UUID.
      */
-    Invalid_Cloud_Service_UUID{
+    INVALID_CLOUD_SERVICE_UUID{
         override fun httpStatusCode(): Int{
             return 404
         }
@@ -45,7 +45,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when attempting to access a URL under /file-encryptors with an invalid UUID.
      */
-    Invalid_Encryption_Service_UUID{
+    INVALID_ENCRYPTION_SERVICE_UUID{
         override fun httpStatusCode(): Int{
             return 404
         }
@@ -53,7 +53,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when attempting to access a URL with a user parameter with an invalid user ID.
      */
-    User_Not_Found{
+    USER_NOT_FOUND{
         override fun httpStatusCode(): Int{
             return 404
         }
@@ -61,7 +61,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when the system can not find the file that needs to be processed based on the request.
      */
-    File_Not_Found{
+    FILE_NOT_FOUND{
         override fun httpStatusCode(): Int{
             return 404
         }
@@ -69,7 +69,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when the requested encryption plugin does not support the requested encryption algorithm.
      */
-    Unsupported_Encryption_Algorithm{
+    UNSUPPORTED_ENCRYPTION_ALGORITHM{
         override fun httpStatusCode(): Int{
             return 400
         }
@@ -77,7 +77,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when setting up a user with an email address that is not in the correct format.
      */
-    Invalid_Email_Address{
+    INVALID_EMAIL_ADDRESS{
         override fun httpStatusCode(): Int{
             return 400
         }
@@ -85,7 +85,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when the file could not be written to the disk.
      */
-    File_Not_Writable{
+    FILE_NOT_WRITABLE{
         override fun httpStatusCode(): Int {
             return 400
         }
@@ -93,7 +93,7 @@ enum class RestExceptionExceptions {
     /**
      * Returned when authentication fails.
      */
-    Authentication_Exception{
+    AUTHENTICATION_EXCEPTION{
         override fun httpStatusCode(): Int{
             return 500
         }
@@ -108,7 +108,7 @@ enum class RestExceptionExceptions {
      * Generates the message associated with the Exception using the locale specified.
      *
      * The message must be part of the messages bundle.  Message keys should be in the format common.message.rest.exception. followed by the name of the enum value in lowercase and will all underscores converted to periods.
-     * For example, the message for Duplicate_User is common.message.rest.exception.duplicate.user
+     * For example, the message for DUPLICATE_USER is common.message.rest.exception.duplicate.user
      *
      * @return A locale specific (if available) user friendly message associated with the exception.
      */

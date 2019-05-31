@@ -51,7 +51,7 @@ enum class EncryptionAsymmetricEncryptionAlgorithms(override val value: String):
     /**
      * RSA in the ECB mode with OAEP with SHA1 and MGF1 padding
      */
-    RSA_ECB_OAEPWithSHA1AndMGF1Padding("RSA/ECB/OAEPWithSHA-1AndMGF1Padding"){
+    RSA_ECB_OAEPWITHSHA1ANDMGF1PADDING("RSA/ECB/OAEPWithSHA-1AndMGF1Padding"){
         override fun keyAlgorithm(): EncryptionAsymmetricKeyAlgorithms {
             return EncryptionAsymmetricKeyAlgorithms.RSA
         }
@@ -62,7 +62,7 @@ enum class EncryptionAsymmetricEncryptionAlgorithms(override val value: String):
     /**
      * RSA in the ECB mode with OAEP with SHA256 and MGF1 padding
      */
-    RSA_ECB_OAEPWithSHA256AndMGF1Padding("RSA/ECB/OAEPWithSHA-256AndMGF1Padding"){
+    RSA_ECB_OAEPWITHSHA256ANDMGF1PADDING("RSA/ECB/OAEPWithSHA-256AndMGF1Padding"){
         override fun keyAlgorithm(): EncryptionAsymmetricKeyAlgorithms {
             return EncryptionAsymmetricKeyAlgorithms.RSA
         }

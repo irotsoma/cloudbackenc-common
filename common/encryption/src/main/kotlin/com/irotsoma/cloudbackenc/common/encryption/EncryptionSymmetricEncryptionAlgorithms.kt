@@ -41,7 +41,7 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * AES algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    AES_CBC_PKCS5Padding("AES/CBC/PKCS5Padding"){
+    AES_CBC_PKCS5PADDING("AES/CBC/PKCS5Padding"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
             return EncryptionSymmetricKeyAlgorithms.AES
         }
@@ -52,7 +52,7 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * AES algorithm in CBC mode with CTS padding algorithm
      */
-    AES_CBC_WithCTS("AES/CBC/WithCTS"){
+    AES_CBC_WITHCTS("AES/CBC/WithCTS"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
             return EncryptionSymmetricKeyAlgorithms.AES
         }
@@ -63,7 +63,7 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * AES algorithm in ECB mode with PKCS5Padding padding algorithm
      */
-    AES_ECB_PKCS5Padding("AES/ECB/PKCS5Padding"){
+    AES_ECB_PKCS5PADDING("AES/ECB/PKCS5Padding"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
             return EncryptionSymmetricKeyAlgorithms.AES
         }
@@ -74,7 +74,7 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * AES algorithm in ECB mode with CTS padding algorithm
      */
-    AES_ECB_WithCTS("AES/ECB/WithCTS"){
+    AES_ECB_WITHCTS("AES/ECB/WithCTS"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
             return EncryptionSymmetricKeyAlgorithms.AES
         }
@@ -85,7 +85,7 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * SKIPJACK algorithm in ECB mode with PKCS7Padding padding algorithm
      */
-    SKIPJACK_ECB_PKCS7Padding("SKIPJACK/ECB/PKCS7Padding"){
+    SKIPJACK_ECB_PKCS7PADDING("SKIPJACK/ECB/PKCS7Padding"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
             return EncryptionSymmetricKeyAlgorithms.SKIPJACK
         }
@@ -96,9 +96,9 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * Twofish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    Twofish_CBC_PKCS5Padding("Twofish/CBC/PKCS5Padding"){
+    TWOFISH_CBC_PKCS5PADDING("Twofish/CBC/PKCS5Padding"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
-            return EncryptionSymmetricKeyAlgorithms.Twofish
+            return EncryptionSymmetricKeyAlgorithms.TWOFISH
         }
         override fun validBlockSizes(): List<Int>        {
             return listOf(128)
@@ -107,9 +107,9 @@ enum class EncryptionSymmetricEncryptionAlgorithms(override val value: String): 
     /**
      * Blowfish algorithm in CBC mode with PKCS5Padding padding algorithm
      */
-    Blowfish_CBC_PKCS5Padding("Blowfish/CBC/PKCS5Padding"){
+    BLOWFISH_CBC_PKCS5PADDING("Blowfish/CBC/PKCS5Padding"){
         override fun keyAlgorithm(): EncryptionSymmetricKeyAlgorithms {
-            return EncryptionSymmetricKeyAlgorithms.Blowfish
+            return EncryptionSymmetricKeyAlgorithms.BLOWFISH
         }
         override fun validBlockSizes(): List<Int>        {
             return listOf(64)

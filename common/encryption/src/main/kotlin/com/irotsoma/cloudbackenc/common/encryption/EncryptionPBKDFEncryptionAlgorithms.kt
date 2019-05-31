@@ -29,9 +29,9 @@ enum class EncryptionPBKDFEncryptionAlgorithms(override val value: String): Encr
     /**
      * PBKDF2 with Hmac using SHA1
      */
-    PBKDF2WithHmacSHA1("PBKDF2WithHmacSHA1"),
+    PBKDF2WITHHMACSHA1("PBKDF2WithHmacSHA1"),
     /**
      * PBKDF2 with Hmac using SHA512
      */
-    PBKDF2WithHmacSHA512("PBKDF2WithHmacSHA512")
+    PBKDF2WITHHMACSHA512("PBKDF2WithHmacSHA512")
 }

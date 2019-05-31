@@ -48,7 +48,7 @@ enum class EncryptionSymmetricKeyAlgorithms(override val value: String): Encrypt
     /**
      * Twofish encryption key algorithm
      */
-    Twofish("Twofish"){
+    TWOFISH("Twofish"){
         override fun validKeyLengths(): List<Int>
         {
             return listOf(128, 192, 256)
@@ -57,7 +57,7 @@ enum class EncryptionSymmetricKeyAlgorithms(override val value: String): Encrypt
     /**
      * Blowfish encryption key algorithm
      */
-    Blowfish("Blowfish"){
+    BLOWFISH("Blowfish"){
         override fun validKeyLengths(): List<Int>
         {
             return listOf(32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448)

@@ -112,11 +112,12 @@ class CloudServiceExtensionList() : Serializable, ArrayList<CloudServiceExtensio
     }
 
     /**
-     * @param list A [List] of CloudServiceExtension objects to add to this class
+     * @param extensions One or more CloudServiceExtension objects to add to this class
      */
-    constructor(list: List<CloudServiceExtension>) : this(){
-        for (extension in list){
+    constructor(vararg extensions: CloudServiceExtension) : this(){
+        for (extension in extensions){
             this.add(extension)
         }
     }
+
 }

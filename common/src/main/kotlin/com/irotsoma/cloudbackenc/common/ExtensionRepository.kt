@@ -76,9 +76,8 @@ abstract class ExtensionRepository{
                 //read config file from jar if present
                 val jarFileEntry = jarFile.getEntry(extensionSettings?.configFileName)
                 if (jarFileEntry == null) {
-                    logger.warn{"Extension file missing config file named ${extensionSettings?.configFileName}. Skipping jar file: ${jar.absolutePath}"}
-                }
-                else {
+                    logger.debug{"Extension file missing config file named ${extensionSettings?.configFileName}. Skipping jar file: ${jar.absolutePath}"}
+                } else {
                     //get Json config file data
                     val jsonValues = jarFile.getInputStream(jarFileEntry).reader().readText()
                     val config: C = ObjectMapper().registerModule(KotlinModule()).readValue(jsonValues)
@@ -97,7 +96,7 @@ abstract class ExtensionRepository{
                     }
                 }
             }  catch (e: Exception) {
-                logger.warn{"Error processing encryption service extension file. This extension will be unavailable: ${jar.name}.   Error Message: ${e.message}"}
+                logger.warn{"Error processing extension file. This extension will be unavailable: ${jar.name}.   Error Message: ${e.message}"}
             }
         }
         val classLoader: URLClassLoader? = URLClassLoader(jarURLs.values.toTypedArray(), parentClassLoader)
@@ -115,10 +114,10 @@ abstract class ExtensionRepository{
                     extensions[key] = gdClass as Class<F>
                 }
                 else {
-                    logger.warn{"Error loading encryption service extension: Factory is not an instance of EncryptionFactory: $value" }
+                    logger.warn{"Error loading extension: Factory is not an instance of ${F::class.simpleName}: $value" }
                 }
             } catch(e: ClassNotFoundException){
-                logger.warn{"Error loading encryption service extension: $value: ${e.message}"}
+                logger.warn{"Error loading extension: $value: ${e.message}"}
             }
         }
 

@@ -36,24 +36,24 @@ abstract class CloudServiceAuthenticationService(val extensionUuid: UUID)  {
     abstract var cloudServiceAuthenticationRefreshListener: CloudServiceAuthenticationRefreshListener?
     /**
      * Requests the login status
-     * @param cloudServiceUser A CloudServiceUser object whose status is requested
+     * @param cloudServiceAuthenticationRequest A CloudServiceAuthenticationRequest object whose status is requested
      * @param cloudBackEncUser Internal CloudBackEncUser that is logged in.  Used for persistent credential storage.
      * @return True if user is currently logged in to the cloud service. Otherwise, false.
      */
-    abstract fun isLoggedIn(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser): Boolean
+    abstract fun isLoggedIn(cloudServiceAuthenticationRequest: CloudServiceAuthenticationRequest, cloudBackEncUser: CloudBackEncUser): Boolean
     /**
      * Requests the system to log into the cloud service.
-     * @param cloudServiceUser A CloudServiceUser object with username and password for login as well as callback url if needed.
+     * @param cloudServiceAuthenticationRequest A CloudServiceAuthenticationRequest object with username and password for login as well as callback url if needed.
      * @param cloudBackEncUser Internal CloudBackEncUser that is attempting to login.  Used for persistent credential storage.
-     * @return CloudServiceUser.STATE depending on the result of the login.
+     * @return CloudServiceAuthenticationState depending on the result of the login and a URI if required by authorization flow.
      */
-    abstract fun login(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE
+    abstract fun login(cloudServiceAuthenticationRequest: CloudServiceAuthenticationRequest, cloudBackEncUser: CloudBackEncUser) : CloudServiceAuthenticationResponse
     /**
      * Requests the system to log off the cloud service.
-     * @param cloudServiceUser A CloudServiceUser object to log out of the cloud service.
+     * @param cloudServiceAuthenticationRequest A CloudServiceAuthenticationRequest object to log out of the cloud service.
      * @param cloudBackEncUser Internal CloudBackEncUser that is attempting to logout.  Used for persistent credential storage.
      * @return Message returned from the cloud service if applicable.
      */
-    abstract fun logout(cloudServiceUser: CloudServiceUser, cloudBackEncUser: CloudBackEncUser) : CloudServiceUser.STATE
+    abstract fun logout(cloudServiceAuthenticationRequest: CloudServiceAuthenticationRequest, cloudBackEncUser: CloudBackEncUser) : CloudServiceAuthenticationResponse
 
 }

@@ -26,49 +26,13 @@ package com.irotsoma.cloudbackenc.common.cloudservices
  * @property password Password for the service (only for login, and only if the service has no external authorization page, should be null otherwise)
  * @property extensionUuid UUID for the cloud service extension.  Defined by the extension author as part of a cloud-service-extension.json file under resources.
  * @property authorizationCallbackURL Use only if state = AWAITING_AUTHORIZATION.  A browser with this URL should be opened for the user to authorize the service.
+ * @property replyWithAuthorizationUrl Set to true if the controller should respond immediately with an authorization url if used by the cloud service rather than sending it through the authorizationCallbackURL.
  */
-class CloudServiceUser(
+data class CloudServiceAuthenticationRequest(
         val username: String,
-        //val internalUsername: String,
         //TODO: Store password as a sealed object or similar
         val password:String?,
         val extensionUuid: String,
-        val authorizationCallbackURL: String?){
-    /**
-     * Enum describing the various states of user authorization.
-     */
-    enum class STATE{
-        /**
-         * Default state when first creating the user object.
-         */
-        INITIALIZED,
-        /**
-         * Used when the system is waiting for the user to authorize CloudBackEnc to access their account.  Usually used
-         * along with CloudServiceUser.authorizationCallbackURL
-         */
-        AWAITING_AUTHORIZATION,
-        /**
-         * Used to indicate the user is logged in to the cloud service and the application is authorized to access their
-         * account.
-         */
-        LOGGED_IN,
-        /**
-         * Used to indicate that a user has logged out of their account.  Only used if user was previously logged in or
-         * when notifying the calling service that a log out operation was successful.  For initial state use
-         * INITIALIZED instead.
-         */
-        LOGGED_OUT,
-        /**
-         * Used to indicate that the user cancelled the login and/or authorization process.
-         */
-        CANCELLED,
-        /**
-         * Used to indicate an error occurred when attempting to log into the cloud service.
-         */
-        ERROR,
-        /**
-         * Used to indicate a successful test without actually calling google services
-         */
-        TEST
-    }
-}
+        val authorizationCallbackURL: String?,
+        val replyWithAuthorizationUrl: Boolean = false
+        )

@@ -13,33 +13,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+
 /*
- * Created by irotsoma on 2/1/17.
+ * Created by irotsoma on 5/31/2019.
  */
 package com.irotsoma.cloudbackenc.common.cloudservices
 
-import com.irotsoma.cloudbackenc.common.CloudBackEncUser
-import java.util.*
+import java.net.URI
 
 /**
- * Interface for creating a listener for authentication events from a cloud service.
+ * Class used for responding to a cloud service authentication request
  *
+ * @property cloudServiceAuthenticationState The state of the login process.
+ * @property cloudServiceAuthenticationUri A URI for continuing the login process if required by the authorization flow.
  * @author Justin Zak
  */
-interface CloudServiceAuthenticationRefreshListener{
-    /**
-     * Internal user associated with the listener.
-     */
-    var user:CloudBackEncUser?
-    /**
-     * Username or other unique ID of the user at the cloud service.
-     */
-    var cloudServiceUsername: String?
-    /**
-     * Implement to receive authentication change events
-     *
-     * @param cloudServiceUuid UUID of the cloud service associated with this listener.
-     * @param newState The new authentication state.
-     */
-    fun onChange(cloudServiceUuid: UUID, newState: CloudServiceAuthenticationState)
-}
+data class CloudServiceAuthenticationResponse(val cloudServiceAuthenticationState: CloudServiceAuthenticationState,
+                                         val cloudServiceAuthenticationUri: URI? = null
+)

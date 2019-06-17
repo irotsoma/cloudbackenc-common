@@ -31,21 +31,25 @@ import java.util.*
  * @property requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
  * @property requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
  * @property additionalSettings Stores any custom settings needed for a cloud service extension
+ * @property loggedInAsUserId (optional) identifier for the cloud service user currently logged in. null if not applicable or no user is logged in.
  */
 class CloudServiceExtension(): Extension() {
     var requiresUsername: Boolean = false
     var requiresPassword: Boolean = false
     var additionalSettings:HashMap<String, String> = HashMap()
+    var loggedInAsUserId: String? = null
 
     /**
      * @param extensionUuid the UUID of the extension
      * @param extensionName the human readable name of the extension
      * @param releaseVersion the numerical release version of the extension
+     * @param loggedInAsUserId (optional) identifier for the cloud service user currently logged in. null if not applicable or no user is logged in.
      */
-    constructor(extensionUuid: String, extensionName: String, releaseVersion: Int) : this(){
+    constructor(extensionUuid: String, extensionName: String, releaseVersion: Int, loggedInAsUserId: String? = null) : this(){
         this.extensionUuid = extensionUuid
         this.extensionName = extensionName
         this.releaseVersion = releaseVersion
+        this.loggedInAsUserId = loggedInAsUserId
     }
     /**
      * @param extensionUuid the UUID of the extension
@@ -53,13 +57,15 @@ class CloudServiceExtension(): Extension() {
      * @param releaseVersion the numerical release version of the extension
      * @param packageName the package name containing the factory class of the extension
      * @param factoryClass the name of the factory class for the extension
+     * @param loggedInAsUserId (optional) identifier for the cloud service user currently logged in. null if not applicable or no user is logged in.
      */
-    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int) : this() {
+    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int, loggedInAsUserId: String? = null) : this() {
         this.extensionUuid = extensionUuid
         this.extensionName = extensionName
         this.packageName = packageName
         this.factoryClass = factoryClass
         this.releaseVersion = releaseVersion
+        this.loggedInAsUserId = loggedInAsUserId
     }
     /**
      * @param extensionUuid the UUID of the extension
@@ -69,15 +75,17 @@ class CloudServiceExtension(): Extension() {
      * @param factoryClass the name of the factory class for the extension
      * @param requiresUsername Indicates that the client must provide a username upfront rather than it being provided to an external validation site.
      * @param requiresPassword Indicates that the client must provide a password upfront rather than it being provided to an external validation site.
+     * @param loggedInAsUserId (optional) identifier for the cloud service user currently logged in. null if not applicable or no user is logged in.
      */
-    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean) : this() {
-        this.extensionUuid =extensionUuid
-        this.extensionName =extensionName
-        this.packageName=packageName
-        this.factoryClass=factoryClass
-        this.releaseVersion=releaseVersion
+    constructor(extensionUuid: String, extensionName: String, packageName: String, factoryClass: String, releaseVersion: Int, requiresUsername: Boolean, requiresPassword: Boolean, loggedInAsUserId: String? = null) : this() {
+        this.extensionUuid = extensionUuid
+        this.extensionName = extensionName
+        this.packageName = packageName
+        this.factoryClass = factoryClass
+        this.releaseVersion = releaseVersion
         this.requiresUsername = requiresUsername
         this.requiresPassword = requiresPassword
+        this.loggedInAsUserId = loggedInAsUserId
     }
 
     /**
@@ -87,7 +95,7 @@ class CloudServiceExtension(): Extension() {
         return if (other !is CloudServiceExtension){
             false
         } else {
-            (other.extensionUuid == this.extensionUuid) && (other.releaseVersion == this.releaseVersion)
+            (other.extensionUuid == this.extensionUuid) && (other.releaseVersion == this.releaseVersion) && (other.loggedInAsUserId == this.loggedInAsUserId)
         }
     }
 
@@ -95,7 +103,7 @@ class CloudServiceExtension(): Extension() {
      * Generates a hash code based on the UUID and version.
      */
     override fun hashCode(): Int {
-        return (extensionUuid.hashCode()) + releaseVersion.hashCode()
+        return (extensionUuid.hashCode()) + releaseVersion.hashCode() + loggedInAsUserId.hashCode()
     }
 }
 

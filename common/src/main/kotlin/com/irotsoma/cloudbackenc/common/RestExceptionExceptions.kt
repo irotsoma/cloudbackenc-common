@@ -113,6 +113,6 @@ enum class RestExceptionExceptions {
      * @return A locale specific (if available) user friendly message associated with the exception.
      */
     fun friendlyMessage(locale: Locale) : String {
-        return ResourceBundle.getBundle("messages",locale).getString("common.message.rest.exception.${this.name.toLowerCase().replace('_','.')}")
+        return ResourceBundle.getBundle("common-messages",locale).getString("common.message.rest.exception.${this.name.toLowerCase().replace('_','.')}")
     }
 }

@@ -24,8 +24,7 @@ import org.junit.Test
 class RestResponseBodyTest{
     @Test
     fun testError(){
-        val testBody = RestResponseBody(CustomRestException())
+        val testBody = RestResponseBody(RestExceptionExceptions.DUPLICATE_USER)
         assert (testBody.restException == RestExceptionExceptions.DUPLICATE_USER)
     }
-    class CustomRestException:RestException(RestExceptionExceptions.DUPLICATE_USER)
 }

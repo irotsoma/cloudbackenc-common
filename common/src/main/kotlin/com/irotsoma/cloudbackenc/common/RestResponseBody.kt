@@ -14,15 +14,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
-import com.irotsoma.cloudbackenc.common.RestExceptionExceptions
-import org.junit.Test
-import java.util.*
+/*
+ * Created by irotsoma on 11/18/2019.
+ */
+package com.irotsoma.cloudbackenc.common
 
-class MessageTest {
-    @Test
-    fun testMessages(){
-        val testError = RestExceptionExceptions.DUPLICATE_USER
-        val testValue = testError.friendlyMessage(Locale.US)
-        assert(testValue == "User already exists.")
+import java.io.Serializable
+
+/**
+ * A response class for rest calls that allows for sending various types or sending a RestException object and allowing deserialization either way.
+ */
+class RestResponseBody<T>(var body: T) : Serializable {
+    /** Companion Object to hold the static constants */
+    companion object{
+        /** UID for this class for java's Serializable object */
+        const val serialVersionUID = 891561687489
+    }
+    var restException:RestExceptionExceptions? = null
+    init {
+        if(body is RestExceptionExceptions){
+            restException = body as RestExceptionExceptions
+        }
     }
 }

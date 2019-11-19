@@ -55,11 +55,14 @@ abstract class ExtensionRepository{
             throw NullPointerException("The value of parentClassLoader must be set before calling loadDynamicServices().")
         }
         //external config extension directory
-        val extensionsDirectory: File? = File(extensionSettings?.directory)
+        val extensionsDirectory: File? =
+            try {
+                File(extensionSettings?.directory!!)
+            } catch (ignore: NullPointerException) { null }
         //internal resources extension directory (packaged extensions or test extensions)
         val resourcesExtensionsDirectory: File? =
             try{
-                File(javaClass.classLoader.getResource("extensions")?.file)
+                File(javaClass.classLoader.getResource("extensions")?.file!!)
             } catch (ignore: NullPointerException) { null }
         if ((extensionsDirectory?.isDirectory != true || !extensionsDirectory.canRead()) && ((resourcesExtensionsDirectory?.isDirectory != true || !(resourcesExtensionsDirectory.canRead())))) {
             logger.warn{"Extensions directory is missing or unreadable."}

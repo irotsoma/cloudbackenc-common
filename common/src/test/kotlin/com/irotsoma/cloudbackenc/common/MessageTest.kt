@@ -1,4 +1,4 @@
-package com.irotsoma.cloudbackenc.common/*
+/*
  * Copyright (C) 2016-2019  Irotsoma, LLC
  *
  * This program is free software: you can redistribute it and/or modify
@@ -13,6 +13,8 @@ package com.irotsoma.cloudbackenc.common/*
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
+
+package com.irotsoma.cloudbackenc.common
 
 import org.junit.Test
 import java.util.*

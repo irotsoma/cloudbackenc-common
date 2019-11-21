@@ -98,6 +98,22 @@ enum class RestExceptionExceptions {
             return 500
         }
     },
+    /**
+     * Returned when a user is not authorized to access a resource.
+     */
+    USER_UNAUTHORIZED{
+        override fun httpStatusCode(): Int{
+            return 403
+        }
+    },
+    /**
+     * Generic response for invalid request body.
+     */
+    INVALID_REQUEST{
+        override fun httpStatusCode(): Int{
+            return 400
+        }
+    },
     ;
 
     /**

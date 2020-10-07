@@ -30,13 +30,13 @@ import java.io.Serializable
  * @property username The ID of the user.
  * @property password The password of the user.
  * @property email (Optional) The email address of the user.  Must be in a valid format if present.
- * @property enabled Boolean value indicating whether the user can currently access the system.  Default = true
+ * @property state Boolean value indicating whether the user can currently access the system.  Default = true
  * @property roles A List of CloudBackEncRoles assigned to the user. Default = empty list
  */
 class CloudBackEncUser(val username: String,
                        val password : String,
                        val email: String?,
-                       val enabled: UserAccountState = UserAccountState.ACTIVE,
+                       val state: UserAccountState = UserAccountState.ACTIVE,
                        val roles : List<CloudBackEncRoles> = emptyList()) : Serializable {
 
     /** Companion Object to hold the static constants */
@@ -54,6 +54,6 @@ class CloudBackEncUser(val username: String,
      * @return Instance of CloudBackEncUser with the password masked by PASSWORD_MASKED.
      */
     fun maskedPasswordInstance(): CloudBackEncUser{
-        return CloudBackEncUser(username, PASSWORD_MASKED, email, enabled,roles)
+        return CloudBackEncUser(username, PASSWORD_MASKED, email, state,roles)
     }
 }

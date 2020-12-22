@@ -1,5 +1,7 @@
 # cloudbackenc-common 
 
+[![Build Status](https://travis-ci.com/irotsoma/cloudbackenc-common.svg?branch=master)](https://travis-ci.com/irotsoma/cloudbackenc-common)
+
 Shared Libraries for CloudBackEnc
 
 <span style="font-size: .5em;">
